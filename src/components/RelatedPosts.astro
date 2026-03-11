@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+    currentSlug: string;
+    currentCategory: string;
+    currentTags: string[];
+    maxPosts?: number;
+}
+
+const { currentSlug, currentCategory, currentTags, maxPosts = 3 } = Astro.props;
+
+const allPosts = await getCollection('blog');
+
+// Score each post based on relevance
+const scoredPosts = allPosts
+    .filter(p => p.slug !== currentSlug)
+    .map(post => {
+        let score = 0;
+
+        // Same category = high relevance
+        if (post.data.category === currentCategory) {
+            score += 5;
+        }
+
+        // Shared tags = medium relevance (cumulative)
+        const sharedTags = post.data.tags.filter(tag => currentTags.includes(tag));
+        score += sharedTags.length * 3;
+
+        return { post, score, sharedTags };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, maxPosts);
+---
+
+{scoredPosts.length > 0 && (
+    <section class="related-posts mt-16 pt-12 border-t border-dark-300">
+        <!-- Section header -->
+        <div class="flex items-center gap-3 mb-8">
+            <div class="w-8 h-8 rounded bg-red/10 border border-red/30 flex items-center justify-center">
+                <i class="bi bi-link-45deg text-red text-sm"></i>
+            </div>
+            <div>
+                <h2 class="text-lg font-bold text-white tracking-tight">Reportes vinculados</h2>
+                <p class="text-[11px] text-gray-500 font-mono uppercase tracking-wider">Inteligencia relacionada</p>
+            </div>
+        </div>
+
+        <!-- Related posts grid -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {scoredPosts.map(({ post, sharedTags, score }) => (
+                <a 
+                    href={`/posts/${post.slug}`} 
+                    class="related-card group block bg-dark-100 border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 no-underline hover:-translate-y-1 hover:shadow-lg hover:shadow-red/5"
+                >
+                    <!-- Image -->
+                    <div class="aspect-[16/9] overflow-hidden relative">
+                        <img 
+                            src={post.data.image} 
+                            alt={post.data.title} 
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80 group-hover:opacity-100"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-100 via-dark-100/40 to-transparent"></div>
+                        
+                        <!-- Relevance indicator -->
+                        <div class="absolute top-2.5 right-2.5 flex items-center gap-1 bg-dark/80 backdrop-blur-sm px-2 py-1 rounded-md border border-dark-300">
+                            <i class="bi bi-lightning-fill text-red text-[10px]"></i>
+                            <span class="text-[9px] font-mono text-gray-400 uppercase tracking-wider">
+                                {score >= 8 ? 'Alta relación' : score >= 5 ? 'Relacionado' : 'Similar'}
+                            </span>
+                        </div>
+
+                        <!-- Category badge -->
+                        <span class="absolute bottom-2.5 left-2.5 bg-dark/80 backdrop-blur-sm text-gray-300 text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded border border-dark-300">
+                            {post.data.category}
+                        </span>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-4">
+                        <h3 class="text-sm font-bold text-white leading-snug mb-2 group-hover:text-red transition-colors line-clamp-2">
+                            {post.data.title}
+                        </h3>
+                        <p class="text-[11px] text-gray-500 leading-relaxed mb-3 line-clamp-2">
+                            {post.data.summary}
+                        </p>
+
+                        <!-- Shared tags -->
+                        {sharedTags.length > 0 && (
+                            <div class="flex flex-wrap gap-1 mb-3">
+                                {sharedTags.map(tag => (
+                                    <span class="text-[9px] font-mono text-red bg-red/10 border border-red/20 px-1.5 py-0.5 rounded">
+                                        #{tag}
+                                    </span>
+                                ))}
+                            </div>
+                        )}
+
+                        <!-- Read link -->
+                        <div class="flex items-center gap-1.5 text-red text-[11px] font-semibold">
+                            <span>Leer reporte</span>
+                            <i class="bi bi-arrow-right transition-transform group-hover:translate-x-1"></i>
+                        </div>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </section>
+)}

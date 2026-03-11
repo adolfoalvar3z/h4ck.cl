@@ -1,0 +1,178 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+
+const posts = await getCollection('blog');
+
+// Count posts per author
+const authorStats = posts.reduce((acc, post) => {
+    const author = post.data.author || 'Anonymous';
+    if (!acc[author]) {
+        acc[author] = {
+            count: 0,
+            lastPost: post.data.date,
+            categories: new Set()
+        };
+    }
+    acc[author].count++;
+    
+    // Simple date comparison (assuming string format YYYY-MM-DD or similar that is sortable)
+    if (new Date(post.data.date) > new Date(acc[author].lastPost)) {
+        acc[author].lastPost = post.data.date;
+    }
+    acc[author].categories.add(post.data.category);
+    return acc;
+}, {} as Record<string, { count: number; lastPost: string; categories: Set<string> }>);
+
+// Convert to array and sort by count desc
+const sortedAuthors = Object.entries(authorStats)
+    .map(([name, stats]) => ({
+        name,
+        ...stats,
+        categories: Array.from(stats.categories)
+    }))
+    .sort((a, b) => b.count - a.count);
+---
+
+<Layout title="Muro de la Fama // Contributors">
+    <div class="relative py-24 overflow-hidden min-h-screen">
+        <!-- Background Decor -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 grid-bg opacity-20"></div>
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-red/5 blur-[120px] rounded-full"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-red/5 blur-[120px] rounded-full"></div>
+            
+            <!-- Floating Data Elements -->
+            <div class="absolute top-1/4 right-10 font-mono text-[8px] text-gray-800 vertical-text hidden lg:block">
+                SYSTEM_ACCESS_TERMINAL_ROOT_AUTHORIZED
+            </div>
+            <div class="absolute bottom-1/4 left-10 font-mono text-[8px] text-gray-800 vertical-text hidden lg:block">
+                ENCRYPTED_DATA_STREAM_SSL_TLS_V1.3
+            </div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <!-- Header -->
+            <div class="mb-24 text-center">
+                <div class="inline-flex items-center gap-3 px-4 py-1 border border-red/20 bg-red/5 rounded mb-6">
+                    <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-red"></span>
+                    </span>
+                    <span class="text-[10px] font-mono text-red uppercase tracking-[0.4em]">Personnel_Directory_v2.0</span>
+                </div>
+                
+                <h1 class="text-6xl md:text-8xl font-black text-white tracking-tighter uppercase mb-6 glitch-title" data-text="WALL_OF_FAME">
+                    MURO DE LA_FAMA
+                </h1>
+                
+                <p class="text-gray-500 max-w-2xl mx-auto font-light text-lg leading-relaxed">
+                    Reconocimiento especial a los analistas y agentes de campo que contribuyen a nuestra base de datos de inteligencia colectiva.
+                </p>
+
+                <!-- Stats Summary -->
+                <div class="mt-16 inline-flex flex-wrap justify-center gap-12 bg-dark-100 border border-dark-300 backdrop-blur-sm p-8 rounded-xl">
+                    <div class="flex flex-col items-center">
+                        <span class="text-red font-black text-4xl mb-1">{sortedAuthors.length}</span>
+                        <span class="font-mono text-[9px] text-gray-500 uppercase tracking-widest">Agentes_Activos</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-12 bg-white/10"></div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-red font-black text-4xl mb-1">{posts.length}</span>
+                        <span class="font-mono text-[9px] text-gray-500 uppercase tracking-widest">Inteligencia_Total</span>
+                    </div>
+                    <div class="hidden sm:block w-px h-12 bg-white/10"></div>
+                    <div class="flex flex-col items-center">
+                        <span class="text-red font-black text-4xl mb-1">{Array.from(new Set(posts.map(p => p.data.category))).length}</span>
+                        <span class="font-mono text-[9px] text-gray-500 uppercase tracking-widest">Sectores_Cubiertos</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Authors Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {sortedAuthors.map((author, index) => (
+                    <div class="group relative">
+                        <!-- Rank Badge -->
+                        <div class="absolute -top-4 -left-4 w-12 h-12 bg-dark border border-dark-300 rounded flex items-center justify-center font-mono font-black text-xs text-gray-500 group-hover:text-red group-hover:border-red/30 transition-all z-20 shadow-xl">
+                            #{String(index + 1).padStart(2, '0')}
+                        </div>
+
+                        <!-- Card -->
+                        <div class="card-hacker h-full p-10 flex flex-col items-center text-center relative overflow-hidden">
+                            <!-- Subtle BG Rank -->
+                            <div class="absolute -bottom-10 -right-10 font-black text-[150px] text-white/[0.02] pointer-events-none group-hover:text-red/[0.03] transition-colors leading-none">
+                                {index + 1}
+                            </div>
+
+                            <!-- Avatar Container -->
+                            <div class="relative mb-8">
+                                <div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-red/20 via-transparent to-red/20 group-hover:from-red group-hover:to-red transition-all duration-700 relative">
+                                    <div class="w-full h-full rounded-full bg-dark flex items-center justify-center overflow-hidden border border-dark-300 relative">
+                                        <img src={`https://api.dicebear.com/7.x/bottts/svg?seed=${author.name}`} alt={author.name} class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-500 opacity-70 group-hover:opacity-100" />
+                                    </div>
+                                    
+                                    <!-- Post Count Overlay -->
+                                    <div title="Publicaciones" class="absolute bottom-0 right-0 bg-red text-white text-sm font-black w-10 h-10 rounded-full flex items-center justify-center border-4 border-dark shadow-[0_0_15px_rgba(255,0,0,0.5)] z-20 group-hover:scale-110 transition-transform duration-300 cursor-help">
+                                        {author.count}
+                                    </div>
+                                </div>
+                                <div class="absolute inset-0 rounded-full bg-red/20 blur-2xl opacity-0 group-hover:opacity-40 transition-opacity duration-700 z-0 pointer-events-none"></div>
+                            </div>
+
+                            <!-- Author Metadata -->
+                            <div class="mb-8">
+                                <h3 class="text-3xl font-black text-white mb-2 uppercase tracking-tight group-hover:text-red transition-all">
+                                    {author.name}
+                                </h3>
+                                <div class="flex items-center justify-center gap-2">
+                                    <div class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.5)]"></div>
+                                    <span class="text-[10px] font-mono text-gray-500 uppercase tracking-widest">
+                                        {author.count > 10 ? 'Nivel_Elite' : author.count > 5 ? 'Operativo_Senior' : 'Agente_Activo'}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <!-- Stats Grid -->
+                            <div class="grid grid-cols-2 gap-px bg-white/5 border border-dark-300 rounded overflow-hidden w-full mb-8">
+                                <div class="bg-dark p-4 text-left">
+                                    <span class="block text-[8px] font-mono text-gray-600 uppercase mb-1 tracking-tighter">ÚLTIMA_OP</span>
+                                    <span class="text-[10px] font-mono text-gray-400">{author.lastPost}</span>
+                                </div>
+                                <div class="bg-dark p-4 text-left">
+                                    <span class="block text-[8px] font-mono text-gray-600 uppercase mb-1 tracking-tighter">ESPECIALIDAD</span>
+                                    <span class="text-[10px] font-mono text-gray-400 truncate">{author.categories[0] || 'GENERAL'}</span>
+                                </div>
+                            </div>
+
+                            <!-- Sectors -->
+                            <div class="w-full text-left mb-8">
+                                <span class="block text-[9px] font-mono text-gray-700 uppercase mb-3 tracking-widest px-1">Sectores_Cubiertos:</span>
+                                <div class="flex flex-wrap gap-2">
+                                    {author.categories.slice(0, 4).map(cat => (
+                                        <span class="text-[8px] font-mono px-2 py-1 bg-dark-100 border border-dark-300 text-gray-500 rounded uppercase hover:border-red/40 hover:text-white transition-all cursor-default">
+                                            {cat}
+                                        </span>
+                                    ))}
+                                    {author.categories.length > 4 && (
+                                        <span class="text-[8px] font-mono px-2 py-1 bg-dark-100 border border-dark-300 text-gray-700 rounded uppercase">
+                                            +{author.categories.length - 4}
+                                        </span>
+                                    )}
+                                </div>
+                            </div>
+
+                            <!-- Action -->
+                            <a href={`/author/${author.name.toLowerCase().replace(/\\s+/g, '-')}`} class="mt-auto group/btn flex items-center justify-center gap-3 w-full py-3 bg-white/5 hover:bg-red transition-all duration-300 rounded overflow-hidden no-underline">
+                                <span class="text-[10px] font-mono font-black text-gray-400 group-hover/btn:text-white uppercase tracking-[0.2em]">Expediente_Completo</span>
+                                <i class="bi bi-arrow-right text-gray-600 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all"></i>
+                            </a>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</Layout>
+
+

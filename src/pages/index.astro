@@ -1,0 +1,366 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import PostTags from '../components/PostTags.astro';
+
+const posts = await getCollection('blog');
+const sortedPosts = posts.sort((a, b) => b.data.date.localeCompare(a.data.date));
+
+// Find posts that explicitly have featured: true
+let featuredList = sortedPosts.filter(post => post.data.featured === true);
+if (featuredList.length === 0) {
+    featuredList = [sortedPosts[0]];
+}
+
+// Filter out all featured posts from the rest
+const featuredIds = featuredList.map(p => p.id);
+const otherPosts = sortedPosts.filter(post => !featuredIds.includes(post.id));
+const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() === 'eventos');
+---
+
+<Layout title="Intelligence Feed">
+
+    <!-- ===== HERO (CAROUSEL) ===== -->
+    <section class="relative overflow-hidden grid group/hero">
+        {featuredList.map((featuredPost, index) => {
+            const activeClass = index === 0 ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none';
+            return (
+                <div class={`carousel-slide row-start-1 col-start-1 transition-opacity duration-1000 ease-in-out ${activeClass}`}>
+                <!-- Background image -->
+                <div class="absolute inset-0">
+                    <img src={featuredPost.data.image} alt="" class="w-full h-full object-cover opacity-30" />
+                    <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-dark/40"></div>
+                </div>
+
+                <div class="relative max-w-7xl mx-auto w-full px-6 lg:px-8 py-28 lg:py-40 flex items-center">
+                    <div class="max-w-3xl">
+                        <!-- Badge -->
+                        <div class="inline-flex items-center gap-2 bg-red/10 border border-red/30 rounded-full px-4 py-1.5 mb-8">
+                            <span class="w-2 h-2 bg-red rounded-full animate-pulse"></span>
+                            <span class="text-[11px] font-mono font-bold text-red uppercase tracking-widest">Artículo destacado</span>
+                        </div>
+
+                        <!-- Title -->
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] tracking-tight mb-6 glitch-title" data-text={featuredPost.data.title}>
+                            {featuredPost.data.title}
+                        </h1>
+
+                        <!-- Summary -->
+                        <p class="text-lg text-gray-400 leading-relaxed max-w-2xl mb-10 line-clamp-3">
+                            {featuredPost.data.summary}
+                        </p>
+
+                        <!-- Meta + CTA -->
+                        <div class="flex flex-wrap items-center gap-6">
+                            <a href={`/posts/${featuredPost.slug}`} class="inline-flex items-center gap-2 bg-red hover:bg-red-dark text-white font-bold text-sm px-8 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 no-underline">
+                                Leer reporte
+                                <i class="bi bi-arrow-right"></i>
+                            </a>
+                            <div class="flex items-center gap-4 text-gray-500 text-xs font-mono hidden sm:flex">
+                                <span class="flex items-center gap-1.5"><i class="bi bi-clock"></i> {featuredPost.data.readTime}</span>
+                                <span class="text-dark-300">·</span>
+                                <span>{featuredPost.data.category}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        ); })}
+
+        <!-- Controles del carrusel (Solo si hay más de 1 destacado) -->
+        {featuredList.length > 1 && (
+            <>
+                <!-- Flechas de navegación -->
+                <button id="hero-prev" class="absolute left-4 lg:left-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-dark/40 backdrop-blur-sm border border-dark-300 rounded-full text-white hover:bg-red hover:border-red transition-all opacity-0 group-hover/hero:opacity-100 group/btn">
+                    <i class="bi bi-chevron-left text-xl group-hover/btn:-translate-x-1 transition-transform"></i>
+                </button>
+                <button id="hero-next" class="absolute right-4 lg:right-8 top-1/2 -translate-y-1/2 z-20 w-12 h-12 flex items-center justify-center bg-dark/40 backdrop-blur-sm border border-dark-300 rounded-full text-white hover:bg-red hover:border-red transition-all opacity-0 group-hover/hero:opacity-100 group/btn">
+                    <i class="bi bi-chevron-right text-xl group-hover/btn:translate-x-1 transition-transform"></i>
+                </button>
+
+                <!-- Puntos indicadores -->
+                <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 flex gap-3">
+                    {featuredList.map((_, i) => {
+                        const dotClass = i === 0 ? 'bg-red w-8' : 'bg-gray-600 hover:bg-gray-400';
+                        return (
+                            <button class={`carousel-dot w-2.5 h-2.5 rounded-full transition-all duration-300 ${dotClass}`} data-index={i} aria-label={`Ir al destacado ${i + 1}`}></button>
+                        );
+                    })}
+                </div>
+            </>
+        )}
+    </section>
+
+    <!-- ===== POSTS SECTION ===== -->
+    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+        <!-- Section header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+            <div>
+                <h2 class="text-2xl font-bold text-white mb-1">Últimos reportes</h2>
+                <p class="text-sm text-gray-500">Inteligencia y análisis en ciberseguridad</p>
+            </div>
+
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <!-- Filters -->
+                <div class="flex gap-1.5 bg-dark-100 border border-dark-300 rounded-lg p-1">
+                    <button class="tab-filter active px-4 py-1.5 text-[11px] font-semibold rounded-md cursor-pointer transition-all uppercase tracking-wider text-gray-400 hover:text-white" data-cat="all">Todos</button>
+                    <button class="tab-filter px-4 py-1.5 text-[11px] font-semibold rounded-md cursor-pointer transition-all uppercase tracking-wider text-gray-400 hover:text-white" data-cat="malware">Malware</button>
+                    <button class="tab-filter px-4 py-1.5 text-[11px] font-semibold rounded-md cursor-pointer transition-all uppercase tracking-wider text-gray-400 hover:text-white" data-cat="networking">Redes</button>
+                    <button class="tab-filter px-4 py-1.5 text-[11px] font-semibold rounded-md cursor-pointer transition-all uppercase tracking-wider text-gray-400 hover:text-white" data-cat="defensive">Defensivo</button>
+                </div>
+                <!-- Search -->
+                <div class="relative">
+                    <i class="bi bi-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 text-xs"></i>
+                    <input type="text" id="search-db" class="bg-dark-100 border border-dark-300 rounded-lg pl-9 pr-4 py-2 text-xs text-gray-300 w-52 focus:border-red/40 focus:outline-none transition-colors placeholder:text-gray-600 font-mono" placeholder="Buscar..." />
+                </div>
+            </div>
+        </div>
+
+        <!-- Posts Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="posts-grid">
+            {sortedPosts.map(post => (
+                <article
+                    class="post-card group bg-dark-100 border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red/5 flex flex-col"
+                    data-category={post.data.category.toLowerCase()}
+                    data-title={post.data.title.toLowerCase()}
+                    data-summary={post.data.summary.toLowerCase()}
+                >
+                    <!-- Image -->
+                    <div class="aspect-video overflow-hidden relative">
+                        <img
+                            src={post.data.image}
+                            alt={post.data.title}
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div class="absolute inset-0 bg-gradient-to-t from-dark-100 to-transparent opacity-50"></div>
+                        <a href={`/category/${post.data.category.toLowerCase().replace(/\s+/g, '-')}`} class="absolute top-3 left-3 bg-dark/80 backdrop-blur-sm text-gray-300 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-dark-300 no-underline hover:text-red hover:border-red/30 transition-all">
+                            {post.data.category}
+                        </a>
+                    </div>
+
+                    <!-- Content -->
+                    <div class="p-5 flex flex-col flex-grow">
+                        <!-- Date -->
+                        <div class="flex items-center gap-2 text-[11px] text-gray-500 font-mono mb-3">
+                            <i class="bi bi-calendar3"></i>
+                            <span>{post.data.date}</span>
+                            <span class="text-dark-300">·</span>
+                            <span>{post.data.readTime}</span>
+                        </div>
+
+                        <!-- Title -->
+                        <h3 class="text-lg font-bold text-white leading-snug mb-3 group-hover:text-red transition-colors glitch-title" data-text={post.data.title}>
+                            {post.data.title}
+                        </h3>
+
+                        <!-- Summary -->
+                        <p class="text-[13px] text-gray-400 leading-relaxed mb-4 flex-grow line-clamp-3">
+                            {post.data.summary}
+                        </p>
+
+                        <!-- Tags -->
+                        <div class="mb-5">
+                            <PostTags tags={post.data.tags} />
+                        </div>
+
+                        <!-- CTA -->
+                        <a href={`/posts/${post.slug}`} class="mt-auto inline-flex items-center gap-2 text-red text-xs font-semibold no-underline group/link hover:gap-3 transition-all">
+                            Leer más
+                            <i class="bi bi-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+                        </a>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </section>
+
+    <!-- ===== EVENTOS ===== -->
+    <section id="eventos" class="max-w-7xl mx-auto px-6 lg:px-8 pb-20">
+        <div class="relative bg-dark-100 border border-dark-300 rounded-2xl p-8 md:p-12 overflow-hidden group hover:border-red/30 transition-colors duration-500 shadow-2xl">
+            <!-- Decorative glow -->
+            <div class="absolute -top-24 -right-24 w-64 h-64 bg-red/10 blur-[80px] rounded-full group-hover:bg-red/20 transition-colors duration-700 pointer-events-none"></div>
+            <div class="absolute -bottom-24 -left-24 w-64 h-64 bg-purple-500/10 blur-[80px] rounded-full group-hover:bg-purple-500/20 transition-colors duration-700 pointer-events-none"></div>
+
+            <div class="relative z-10 mb-10">
+                <div class="inline-flex items-center gap-2 bg-red/10 border border-red/30 rounded-full px-4 py-1.5 mb-6">
+                    <span class="w-2 h-2 bg-red rounded-full animate-pulse"></span>
+                    <span class="text-[11px] font-mono font-bold text-red uppercase tracking-widest">Radar de Actividad</span>
+                </div>
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="max-w-xl">
+                        <h2 class="text-3xl md:text-4xl font-black text-white uppercase tracking-tight mb-3">
+                            Próximos Eventos <span class="text-transparent bg-clip-text bg-gradient-to-r from-red to-purple-500">& CTFs</span>
+                        </h2>
+                        <p class="text-gray-400 text-sm font-mono border-l-2 border-dark-300 pl-3 leading-relaxed">
+                            Competiciones, conferencias y talleres. Pon a prueba tus habilidades informáticas y expande tu red en la comunidad.
+                        </p>
+                    </div>
+                    {eventPosts.length > 3 && (
+                        <a href="/category/eventos" class="inline-flex items-center gap-2 text-xs font-mono text-gray-400 hover:text-white transition-colors uppercase tracking-wider bg-dark border border-dark-300 px-4 py-2 rounded-lg hover:border-gray-500 flex-shrink-0">
+                            Ver todos <i class="bi bi-grid"></i>
+                        </a>
+                    )}
+                </div>
+            </div>
+
+            <div class="relative z-10">
+                {eventPosts.length > 0 ? (
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        {eventPosts.slice(0, 3).map((event) => {
+                            // Helper para formatear fecha (evitamos problemas en SSR directo sin lógica compleja de Dates)
+                            const dateObj = new Date(event.data.date);
+                            const day = dateObj.getDate();
+                            const month = dateObj.toLocaleDateString('es-ES', { month: 'short' }).substring(0, 3);
+                            
+                            return (
+                                <a href={`/posts/${event.slug}`} class="block group/card bg-dark border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(255,0,0,0.1)] flex flex-col">
+                                    <div class="relative aspect-video overflow-hidden border-b border-dark-300">
+                                        <div class="absolute inset-0 bg-dark/60 z-10 group-hover/card:bg-transparent transition-colors duration-500"></div>
+                                        <img src={event.data.image} alt={event.data.title} class="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105" />
+                                        
+                                        <!-- Etiqueta de fecha flotante -->
+                                        <div class="absolute top-3 right-3 z-20">
+                                            <div class="bg-dark/80 backdrop-blur-md border border-dark-300 text-center rounded-lg overflow-hidden flex flex-col min-w-[3rem] shadow-lg">
+                                                <span class="bg-red text-white text-[9px] font-black uppercase py-0.5">{month}</span>
+                                                <span class="text-white font-bold text-sm py-1 font-mono">{day}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="p-5 flex flex-col flex-grow">
+                                        <h3 class="text-lg font-bold text-white mb-2 leading-tight group-hover/card:text-red transition-colors line-clamp-2">
+                                            {event.data.title}
+                                        </h3>
+                                        <p class="text-[13px] text-gray-400 leading-relaxed mb-4 line-clamp-2">
+                                            {event.data.summary}
+                                        </p>
+                                        
+                                        <div class="mt-auto pt-4 border-t border-dark-300/50 flex items-center justify-between">
+                                            <span class="text-[10px] text-gray-400 font-mono uppercase bg-dark-100 px-2 py-1 rounded border border-dark-300">
+                                                {event.data.tags[0] || 'Evento'}
+                                            </span>
+                                            <span class="text-red text-xs font-bold inline-flex items-center gap-1 group-hover/card:gap-2 transition-all">
+                                                Detalles <i class="bi bi-arrow-right"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </a>
+                            );
+                        })}
+                    </div>
+                ) : (
+                    <div class="bg-dark/30 border border-dashed border-dark-300 rounded-xl p-10 flex flex-col items-center justify-center text-center">
+                        <div class="w-16 h-16 bg-dark-100 rounded-full flex items-center justify-center mb-4 border border-dark-300 shadow-inner">
+                            <i class="bi bi-radar text-2xl text-gray-500 animate-[spin_4s_linear_infinite]"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Radar silencioso</h3>
+                        <p class="text-gray-400 text-sm max-w-sm">No tenemos eventos o CTFs programados en nuestras coordenadas por el momento. Mantente atento a futuras transmisiones.</p>
+                    </div>
+                )}
+            </div>
+        </div>
+    </section>
+
+</Layout>
+
+<script>
+    // --- Hero Carousel Logic ---
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+    const prevBtn = document.getElementById('hero-prev');
+    const nextBtn = document.getElementById('hero-next');
+    let currentSlide = 0;
+    let slideInterval;
+
+    if (slides.length > 1) {
+        function goToSlide(index) {
+            // Eliminar clases activas del actual
+            slides[currentSlide].classList.remove('opacity-100', 'z-10');
+            slides[currentSlide].classList.add('opacity-0', 'z-0', 'pointer-events-none');
+            if(dots[currentSlide]) {
+                dots[currentSlide].classList.remove('bg-red', 'w-8');
+                dots[currentSlide].classList.add('bg-gray-600');
+            }
+
+            // Actualizar índice
+            currentSlide = index;
+
+            // Añadir clases activas al nuevo
+            slides[currentSlide].classList.remove('opacity-0', 'z-0', 'pointer-events-none');
+            slides[currentSlide].classList.add('opacity-100', 'z-10');
+            if(dots[currentSlide]) {
+                dots[currentSlide].classList.remove('bg-gray-600');
+                dots[currentSlide].classList.add('bg-red', 'w-8');
+            }
+        }
+
+        function nextSlide() {
+            goToSlide((currentSlide + 1) % slides.length);
+        }
+
+        function prevSlide() {
+            goToSlide((currentSlide - 1 + slides.length) % slides.length);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, 7000); // 7 segundos
+        }
+
+        // Listeners flechas
+        if (nextBtn) nextBtn.addEventListener('click', () => { nextSlide(); resetInterval(); });
+        if (prevBtn) prevBtn.addEventListener('click', () => { prevSlide(); resetInterval(); });
+
+        // Listeners puntos
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                goToSlide(index);
+                resetInterval();
+            });
+        });
+
+        // Autoplay
+        resetInterval();
+    }
+
+    // --- Search & Filter Logic ---
+    const searchInput = document.getElementById('search-db') as HTMLInputElement;
+    const filters = document.querySelectorAll('.tab-filter');
+    const posts = document.querySelectorAll('.post-card');
+
+    function filterPosts() {
+        const term = searchInput?.value.toLowerCase() || '';
+        const activeFilter = document.querySelector('.tab-filter.active')?.getAttribute('data-cat') || 'all';
+
+        posts.forEach(post => {
+            const el = post as HTMLElement;
+            const title = el.dataset.title || '';
+            const summary = el.dataset.summary || '';
+            const category = el.dataset.category || '';
+
+            const matchesSearch = title.includes(term) || summary.includes(term);
+            const matchesFilter = activeFilter === 'all' || category.includes(activeFilter);
+
+            el.style.display = matchesSearch && matchesFilter ? '' : 'none';
+        });
+    }
+
+    searchInput?.addEventListener('input', filterPosts);
+
+    filters.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filters.forEach(f => f.classList.remove('active'));
+            btn.classList.add('active');
+            filterPosts();
+        });
+    });
+
+    // Keyboard shortcut
+    document.addEventListener('keydown', (e) => {
+        if (e.key === '/' && document.activeElement?.tagName !== 'INPUT') {
+            e.preventDefault();
+            searchInput?.focus();
+        }
+    });
+</script>

@@ -1,0 +1,77 @@
+---
+export interface Props {
+    title: string;
+    description: string;
+    url: URL;
+}
+
+const { title, description, url } = Astro.props;
+
+const shareUrl = encodeURIComponent(url.href);
+const shareTitle = encodeURIComponent(title);
+---
+
+<div class="flex items-center gap-3">
+    <span class="text-[11px] font-mono text-gray-500 uppercase tracking-wider mr-2">Compartir:</span>
+    <a href={`https://api.whatsapp.com/send?text=${shareTitle}%20${shareUrl}`} target="_blank" rel="noopener noreferrer" class="share-btn group" aria-label="WhatsApp">
+        <i class="bi bi-whatsapp transition-transform group-hover:scale-110"></i>
+    </a>
+    <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`} target="_blank" rel="noopener noreferrer" class="share-btn group" aria-label="LinkedIn">
+        <i class="bi bi-linkedin transition-transform group-hover:scale-110"></i>
+    </a>
+    <a href={`https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareTitle}`} target="_blank" rel="noopener noreferrer" class="share-btn group" aria-label="X (Twitter)">
+        <i class="bi bi-twitter-x transition-transform group-hover:scale-110"></i>
+    </a>
+    <a href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`} target="_blank" rel="noopener noreferrer" class="share-btn group" aria-label="Facebook">
+        <i class="bi bi-facebook transition-transform group-hover:scale-110"></i>
+    </a>
+    <button type="button" class="share-btn group copy-link-btn relative" data-url={url.href} aria-label="Copiar Enlace (Instagram y otros)" title="Copiar Enlace">
+        <i class="bi bi-instagram transition-all duration-300 absolute group-hover:opacity-0 group-hover:scale-50"></i>
+        <i class="bi bi-link-45deg transition-all duration-300 absolute opacity-0 scale-50 group-hover:opacity-100 group-hover:scale-110"></i>
+    </button>
+</div>
+
+<style>
+    @reference "../assets/css/main.css";
+    .share-btn {
+        @apply relative w-9 h-9 rounded-lg bg-[#121212] border border-[#333] flex items-center justify-center text-gray-500 hover:text-white transition-all duration-300 hover:-translate-y-0.5;
+    }
+    .share-btn[aria-label="WhatsApp"]:hover {
+        @apply text-[#25D366] border-[#25D366] bg-[#25D366]/10 shadow-[0_0_10px_rgba(37,211,102,0.2)];
+    }
+    .share-btn[aria-label="LinkedIn"]:hover {
+        @apply text-[#0A66C2] border-[#0A66C2] bg-[#0A66C2]/10 shadow-[0_0_10px_rgba(10,102,194,0.2)];
+    }
+    .share-btn[aria-label="X (Twitter)"]:hover {
+        @apply text-white border-white bg-white/10 shadow-[0_0_10px_rgba(255,255,255,0.2)];
+    }
+    .share-btn[aria-label="Facebook"]:hover {
+        @apply text-[#1877F2] border-[#1877F2] bg-[#1877F2]/10 shadow-[0_0_10px_rgba(24,119,242,0.2)];
+    }
+    .share-btn.copy-link-btn:hover {
+        @apply text-[#E1306C] border-[#E1306C] bg-[#E1306C]/10 shadow-[0_0_10px_rgba(225,48,108,0.2)];
+    }
+</style>
+
+<script>
+    const copyBtns = document.querySelectorAll('.copy-link-btn');
+    copyBtns.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            const url = btn.getAttribute('data-url');
+            if (url) {
+                try {
+                    await navigator.clipboard.writeText(url);
+                    const originalHTML = btn.innerHTML;
+                    btn.innerHTML = '<i class="bi bi-check2 text-lg"></i>';
+                    btn.classList.add('!text-[#25D366]', '!border-[#25D366]', '!bg-[#25D366]/10');
+                    setTimeout(() => {
+                        btn.innerHTML = originalHTML;
+                        btn.classList.remove('!text-[#25D366]', '!border-[#25D366]', '!bg-[#25D366]/10');
+                    }, 2000);
+                } catch (err) {
+                    console.error('Failed to copy: ', err);
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,306 @@
+
+> h4ck-cl-astro@1.0.0 dev
+> astro dev
+
+18:43:18 [types] Generated 1ms
+
+ astro  v4.16.19 ready in 289 ms
+
+┃ Local    http://127.0.0.1:4321/
+
+18:43:18 watching for file changes...
+18:43:30 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at F:/laragon/www/h4ck.cl/src/pages/index.astro:24:40
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:43:50 Configuration file updated. Restarting...
+18:43:50 [types] Generated 2ms
+18:43:50 [vite] Re-optimizing dependencies because vite config has changed
+18:44:02 [200] / 34ms
+18:44:03 [watch] dev_log3.txt
+18:44:17 Configuration file updated. Restarting...
+18:44:17 [watch] astro.config.mjs
+18:44:17 [watch] dev_log3.txt
+18:44:17 [types] Generated 1ms
+18:44:18 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:44:30 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:44:42 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:44:48 [watch] src/pages/index.astro
+18:44:53 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:06 [watch] src/pages/index.astro
+18:45:10 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:10 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:11 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:13 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:16 [watch] src/pages/index.astro
+18:45:20 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:20 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:20 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:21 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:21 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:21 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:21 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:22 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:22 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:22 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:22 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:23 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:23 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:23 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:26 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:26 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:26 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:27 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:27 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:27 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:28 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:46 [watch] src/pages/index.astro
+18:45:58 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:45:58 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:13 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:14 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:14 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:14 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:15 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:15 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:38 Configuration file updated. Restarting...
+18:46:38 [types] Generated 1ms
+18:46:38 [vite] Re-optimizing dependencies because vite config has changed
+18:46:41 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:41 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:45 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:49 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:46:56 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:47:16 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:48:26 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:49:02 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:49:19 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:55:54 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:56:30 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+18:56:54 Configuration file updated. Restarting...
+18:56:54 [types] Generated 1ms
+18:56:54 [vite] Re-optimizing dependencies because vite config has changed
+18:57:29 Configuration file updated. Restarting...
+18:57:29 [types] Generated 1ms
+18:58:23 Configuration file updated. Restarting...
+18:58:23 [types] Generated 1ms
+18:58:47 [200] / 37ms
+18:58:47 [watch] dev_log3.txt
+18:58:54 [200] / 8ms
+18:59:02 [200] /generator 7ms
+18:59:02 [watch] dev_log3.txt
+18:59:03 [vite] [32m✨ new dependencies optimized: [33mmarked[32m[39m
+18:59:03 [vite] [32m✨ optimized dependencies changed. reloading[39m
+18:59:04 [watch] dev_log3.txt
+18:59:04 [watch] dev_log3.txt
+18:59:04 [200] /generator 36ms
+18:59:04 [200] /generator 36ms
+18:59:04 [200] /hall-of-fame 40ms
+18:59:04 [watch] dev_log3.txt
+18:59:05 [200] /about 5ms
+18:59:06 [watch] dev_log3.txt
+18:59:06 [200] /hall-of-fame 7ms
+18:59:06 [watch] dev_log3.txt
+18:59:14 [200] /author/shield_guard 8ms
+18:59:14 [watch] dev_log3.txt
+18:59:16 [200] /author/ghost_zero 9ms
+18:59:16 [watch] dev_log3.txt
+18:59:17 [200] /author/sysadmin_x 4ms
+18:59:17 [watch] dev_log3.txt
+18:59:18 [200] /author/shield_guard 4ms
+18:59:18 [watch] dev_log3.txt
+18:59:19 [200] /author/ghost_zero 4ms
+18:59:19 [watch] dev_log3.txt
+18:59:19 [200] /author/net_specter 8ms
+18:59:19 [watch] dev_log3.txt
+18:59:20 [200] /author/root_admin 5ms
+18:59:20 [watch] dev_log3.txt
+18:59:20 [200] /author/sysadmin_x 3ms
+18:59:21 [watch] dev_log3.txt
+18:59:23 [200] /hall-of-fame 5ms
+18:59:23 [watch] dev_log3.txt
+18:59:27 [200] / 7ms
+18:59:27 [watch] dev_log3.txt
+18:59:28 [200] /generator 4ms
+18:59:28 [watch] dev_log3.txt
+19:02:56 [200] / 12ms
+19:02:56 [watch] dev_log3.txt
+19:02:56 [200] /generator 12ms
+19:02:56 [watch] dev_log3.txt
+19:03:00 [200] /posts/phoenix-protocol 71ms
+19:03:00 [watch] dev_log3.txt
+19:03:01 [200] /generator 7ms
+19:03:01 [watch] dev_log3.txt
+19:03:01 [200] /posts/phoenix-protocol 7ms
+19:03:01 [watch] dev_log3.txt
+19:03:07 [200] /posts/phoenix-protocol 7ms
+19:03:07 [watch] dev_log3.txt
+19:03:08 [200] /generator 8ms
+19:03:08 [watch] dev_log3.txt
+19:03:08 [200] /posts/phoenix-protocol 7ms
+19:03:08 [watch] dev_log3.txt
+19:03:11 [watch] src/pages/posts/[slug].astro
+19:03:11 [watch] dev_log3.txt
+19:03:11 [200] /posts/phoenix-protocol 50ms
+19:03:12 [200] /posts/phoenix-protocol 8ms
+19:03:12 [watch] dev_log3.txt
+19:03:12 [200] / 9ms
+19:03:12 [watch] dev_log3.txt
+19:03:13 [200] /generator 6ms
+19:03:13 [watch] dev_log3.txt
+19:03:13 [200] / 11ms
+19:03:13 [watch] dev_log3.txt
+19:03:15 [200] /posts/void-ransomware 19ms
+19:03:16 [watch] dev_log3.txt
+19:03:16 [200] /generator 7ms
+19:03:16 [watch] dev_log3.txt
+19:03:42 [200] / 8ms
+19:03:42 [watch] dev_log3.txt
+19:03:43 [200] /generator 11ms
+19:03:43 [watch] dev_log3.txt
+19:03:43 [200] / 19ms
+19:03:43 [watch] dev_log3.txt

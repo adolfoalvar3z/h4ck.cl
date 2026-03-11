@@ -1,0 +1,29 @@
+---
+interface Props {
+    tags: string[];
+    size?: 'xs' | 'sm' | 'md';
+}
+
+const { tags, size = 'sm' } = Astro.props;
+
+const sizeClasses = {
+    xs: 'text-[8px] px-1.5 py-0.5 tracking-tighter',
+    sm: 'text-[10px] px-2 py-0.5',
+    md: 'text-[11px] px-3 py-1',
+};
+---
+
+<div class="flex flex-wrap gap-2">
+    {tags.map(tag => (
+        <a 
+            href={`/tags/${tag.toLowerCase()}`}
+            class:list={[
+                "font-mono border border-white/5 bg-white/5 no-underline transition-all duration-300 uppercase",
+                "text-zinc-500 hover:text-hacker-red hover:border-hacker-red/30 hover:bg-hacker-red/10",
+                sizeClasses[size]
+            ]}
+        >
+            <span class="text-hacker-red opacity-50 mr-0.5">#</span>{tag}
+        </a>
+    ))}
+</div>

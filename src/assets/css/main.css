@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+@theme {
+    /* Mapeo de colores para compatibilidad con clases existentes */
+    --color-hacker-black: #0A0A0A;
+    --color-hacker-dark:  #121212;
+    --color-hacker-red:   #BD0405;
+    --color-hacker-red-dark: #9A0304;
+    --color-hacker-red-light: #E53535;
+
+    /* Mantengo los nombres cortos también */
+    --color-dark:     #0A0A0A;
+    --color-red:      #BD0405;
+
+    /* Fuentes */
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ===== Glitch Effect ===== */
+.glitch-title {
+    position: relative;
+}
+.glitch-title::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+.glitch-title:hover::after {
+    opacity: 1;
+    animation: glitch 0.4s steps(2, end) infinite;
+    color: white;
+    text-shadow: -2px 0 #ff00c1, 2px 0 #00fff9;
+}
+@keyframes glitch {
+    0%   { clip-path: inset(80% 0 0 0); transform: translate(-3px, 2px); }
+    25%  { clip-path: inset(10% 0 70% 0); transform: translate(3px, -2px); }
+    50%  { clip-path: inset(50% 0 30% 0); transform: translate(-3px, 0); }
+    75%  { clip-path: inset(20% 0 60% 0); transform: translate(3px, 2px); }
+    100% { clip-path: inset(70% 0 5% 0); transform: translate(-3px, -2px); }
+}
+
+/* ===== Tab Filter Active State ===== */
+.tab-filter.active {
+    background-color: var(--color-red) !important;
+    color: white !important;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--color-dark); }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-red); }
+
+/* ===== Post Content Typography ===== */
+.post-content { color: #d1d5db; line-height: 1.9; font-size: 1.05rem; }
+.post-content h1, .post-content h2, .post-content h3 { color: white; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; }
+.post-content h2 { border-bottom: 1px solid var(--color-dark-300); padding-bottom: 0.5rem; }
+.post-content p { margin-bottom: 1.5rem; }
+.post-content ul { list-style-type: disc; margin-left: 1.5rem; margin-bottom: 1.5rem; }
+.post-content ul li { margin-bottom: 0.5rem; }
+.post-content strong { color: #f3f4f6; }
+.post-content code { background-color: var(--color-dark-200); padding: 2px 8px; border-radius: 4px; font-family: var(--font-mono); color: var(--color-red); font-size: 0.9em; }
+.post-content pre { background-color: var(--color-dark); border: 1px solid var(--color-dark-300); padding: 1.5rem; border-radius: 4px; overflow-x: auto; margin-bottom: 1.5rem; }

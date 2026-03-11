@@ -1,0 +1,7 @@
+17:01:02 [types] Generated 341ms
+17:01:02 [build] output: "static"
+17:01:02 [build] directory: F:\laragon\www\h4ck.cl\dist\
+17:01:02 [build] Collecting build info...
+17:01:02 [build] âœ“ Completed in 353ms.
+17:01:02 [build] Building static entrypoints...
+¨Desea terminar el trabajo por lotes (S/N)? ¨Desea terminar el trabajo por lotes (S/N)? 

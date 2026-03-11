@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import PostTags from '../../components/PostTags.astro';
+import CategoryBadge from '../../components/CategoryBadge.astro';
+
+export async function getStaticPaths() {
+    const posts = await getCollection('blog');
+    const categories = [...new Set(posts.map(p => p.data.category))];
+
+    return categories.map(category => ({
+        params: { slug: category.toLowerCase().replace(/\s+/g, '-') },
+        props: { 
+            category,
+            posts: posts.filter(p => p.data.category === category)
+                .sort((a, b) => b.data.date.localeCompare(a.data.date))
+        },
+    }));
+}
+
+const { category, posts } = Astro.props;
+
+// Get all categories for sidebar nav
+const allPosts = await getCollection('blog');
+const allCategories = [...new Set(allPosts.map(p => p.data.category))];
+const categoryCounts = allCategories.map(cat => ({
+    name: cat,
+    slug: cat.toLowerCase().replace(/\s+/g, '-'),
+    count: allPosts.filter(p => p.data.category === cat).length,
+    active: cat === category,
+}));
+---
+
+<Layout title={`${category} — Categoría`} description={`Todos los reportes de inteligencia en la categoría: ${category}`}>
+
+    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+        <!-- Header -->
+        <div class="mb-14">
+            <a href="/" class="inline-flex items-center gap-2 text-gray-500 hover:text-white text-xs font-mono transition-colors mb-8 no-underline uppercase tracking-wider">
+                <i class="bi bi-arrow-left"></i> Volver al feed
+            </a>
+
+            <div class="flex items-center gap-4 mb-4">
+                <div class="w-12 h-12 rounded-lg bg-red/10 border border-red/30 flex items-center justify-center">
+                    <i class="bi bi-folder2-open text-red text-xl"></i>
+                </div>
+                <div>
+                    <p class="text-[11px] text-gray-500 font-mono uppercase tracking-widest mb-1">Categoría</p>
+                    <h1 class="text-3xl md:text-4xl font-black text-white tracking-tight">{category}</h1>
+                </div>
+            </div>
+            <p class="text-gray-400 text-sm max-w-2xl">
+                {posts.length} {posts.length === 1 ? 'reporte encontrado' : 'reportes encontrados'} en esta categoría.
+            </p>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-10">
+            <!-- Posts -->
+            <div class="flex-1">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {posts.map(post => (
+                        <article class="group bg-dark-100 border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red/5 flex flex-col">
+                            <!-- Image -->
+                            <div class="aspect-video overflow-hidden relative">
+                                <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark-100 to-transparent opacity-50"></div>
+                            </div>
+
+                            <!-- Content -->
+                            <div class="p-5 flex flex-col flex-grow">
+                                <div class="flex items-center gap-2 text-[11px] text-gray-500 font-mono mb-3">
+                                    <i class="bi bi-calendar3"></i>
+                                    <span>{post.data.date}</span>
+                                    <span class="text-dark-300">·</span>
+                                    <span>{post.data.readTime}</span>
+                                </div>
+
+                                <h3 class="text-lg font-bold text-white leading-snug mb-3 group-hover:text-red transition-colors">
+                                    {post.data.title}
+                                </h3>
+
+                                <p class="text-[13px] text-gray-400 leading-relaxed mb-4 flex-grow line-clamp-3">
+                                    {post.data.summary}
+                                </p>
+
+                                <PostTags tags={post.data.tags} />
+
+                                <a href={`/posts/${post.slug}`} class="mt-4 inline-flex items-center gap-2 text-red text-xs font-semibold no-underline group/link hover:gap-3 transition-all">
+                                    Leer más
+                                    <i class="bi bi-arrow-right transition-transform group-hover/link:translate-x-1"></i>
+                                </a>
+                            </div>
+                        </article>
+                    ))}
+                </div>
+            </div>
+
+            <!-- Sidebar: Categories -->
+            <aside class="lg:w-72 shrink-0">
+                <div class="sticky top-24">
+                    <div class="bg-dark-100 border border-dark-300 rounded-xl p-5">
+                        <h3 class="text-xs font-bold text-white uppercase tracking-widest mb-5 flex items-center gap-2">
+                            <i class="bi bi-grid text-red text-sm"></i>
+                            Categorías
+                        </h3>
+                        <nav class="flex flex-col gap-1">
+                            {categoryCounts.map(cat => (
+                                <a 
+                                    href={`/category/${cat.slug}`}
+                                    class:list={[
+                                        "flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-mono transition-all no-underline",
+                                        cat.active 
+                                            ? "bg-red/10 text-red border border-red/20" 
+                                            : "text-gray-400 hover:text-white hover:bg-dark-200"
+                                    ]}
+                                >
+                                    <span class="uppercase tracking-wider">{cat.name}</span>
+                                    <span class:list={[
+                                        "text-[10px] px-2 py-0.5 rounded-full",
+                                        cat.active ? "bg-red/20 text-red" : "bg-dark-200 text-gray-600"
+                                    ]}>
+                                        {cat.count}
+                                    </span>
+                                </a>
+                            ))}
+                        </nav>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </section>
+
+</Layout>
