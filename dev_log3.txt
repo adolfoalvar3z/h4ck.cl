@@ -304,3 +304,103 @@
 19:03:43 [watch] dev_log3.txt
 19:03:43 [200] / 19ms
 19:03:43 [watch] dev_log3.txt
+19:26:31 [ERROR] [GetStaticPathsRequired] `getStaticPaths()` function is required for dynamic routes. Make sure that you `export` a `getStaticPaths` function from your dynamic route.
+  Hint:
+    See https://docs.astro.build/en/guides/routing/#dynamic-routes for more information on dynamic routes.
+    
+    Alternatively, set `output: "server"` or `output: "hybrid"` in your Astro config file to switch to a non-static server build. This error can also occur if using `export const prerender = true;`.
+    See https://docs.astro.build/en/guides/server-side-rendering/ for more information on non-static rendering.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/get-static-paths-required/
+  Stack trace:
+    at F:\laragon\www\h4ck.cl\node_modules\@keystatic\astro\internal\keystatic-astro-page.astro
+    [...] See full stack trace in the browser, or rerun with --verbose.
+19:27:21 [watch] dev_log3.txt
+19:27:21 [ERROR] [GetStaticPathsRequired] `getStaticPaths()` function is required for dynamic routes. Make sure that you `export` a `getStaticPaths` function from your dynamic route.
+  Hint:
+    See https://docs.astro.build/en/guides/routing/#dynamic-routes for more information on dynamic routes.
+    
+    Alternatively, set `output: "server"` or `output: "hybrid"` in your Astro config file to switch to a non-static server build. This error can also occur if using `export const prerender = true;`.
+    See https://docs.astro.build/en/guides/server-side-rendering/ for more information on non-static rendering.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/get-static-paths-required/
+  Stack trace:
+    at validateDynamicRouteModule (file:///F:/laragon/www/h4ck.cl/node_modules/astro/dist/core/routing/validation.js:19:11)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+19:27:22 [watch] dev_log3.txt
+19:27:23 [200] /generator 7ms
+19:27:23 [watch] dev_log3.txt
+19:30:53 [ERROR] [GetStaticPathsRequired] `getStaticPaths()` function is required for dynamic routes. Make sure that you `export` a `getStaticPaths` function from your dynamic route.
+  Hint:
+    See https://docs.astro.build/en/guides/routing/#dynamic-routes for more information on dynamic routes.
+    
+    Alternatively, set `output: "server"` or `output: "hybrid"` in your Astro config file to switch to a non-static server build. This error can also occur if using `export const prerender = true;`.
+    See https://docs.astro.build/en/guides/server-side-rendering/ for more information on non-static rendering.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/get-static-paths-required/
+  Stack trace:
+    at F:\laragon\www\h4ck.cl\node_modules\@keystatic\astro\internal\keystatic-astro-page.astro
+    [...] See full stack trace in the browser, or rerun with --verbose.
+19:31:46 Configuration file updated. Restarting...
+19:31:46 [watch] astro.config.mjs
+19:31:46 [watch] dev_log3.txt
+19:31:46 [types] Generated 2ms
+19:31:47 [200] /keystatic/ 11ms
+19:31:47 [200] /keystatic/ 11ms
+19:31:47 [ERROR] [NoMatchingRenderer] Unable to render `Keystatic`.
+
+No valid renderer was found for the `.js` file extension.
+  Hint:
+    Did you mean to enable the `@astrojs/react`, `@astrojs/preact`, `@astrojs/solid-js`, `@astrojs/vue`, `@astrojs/svelte` or `@astrojs/lit` integration?
+    
+    See https://docs.astro.build/en/guides/framework-components/ for more information on how to install and configure integrations.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/no-matching-renderer/
+  Stack trace:
+    at F:\laragon\www\h4ck.cl\node_modules\astro\dist\runtime\server\render\component.js:149:15
+    [...] See full stack trace in the browser, or rerun with --verbose.
+19:31:47 [ERROR] [NoMatchingRenderer] Unable to render `Keystatic`.
+
+No valid renderer was found for the `.js` file extension.
+  Hint:
+    Did you mean to enable the `@astrojs/react`, `@astrojs/preact`, `@astrojs/solid-js`, `@astrojs/vue`, `@astrojs/svelte` or `@astrojs/lit` integration?
+    
+    See https://docs.astro.build/en/guides/framework-components/ for more information on how to install and configure integrations.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/no-matching-renderer/
+  Stack trace:
+    at F:\laragon\www\h4ck.cl\node_modules\astro\dist\runtime\server\render\component.js:149:15
+    [...] See full stack trace in the browser, or rerun with --verbose.
+19:31:54 [200] /keystatic/ 3ms
+19:31:54 [ERROR] [NoMatchingRenderer] Unable to render `Keystatic`.
+
+No valid renderer was found for the `.js` file extension.
+  Hint:
+    Did you mean to enable the `@astrojs/react`, `@astrojs/preact`, `@astrojs/solid-js`, `@astrojs/vue`, `@astrojs/svelte` or `@astrojs/lit` integration?
+    
+    See https://docs.astro.build/en/guides/framework-components/ for more information on how to install and configure integrations.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/no-matching-renderer/
+  Stack trace:
+    at F:\laragon\www\h4ck.cl\node_modules\astro\dist\runtime\server\render\component.js:149:15
+    [...] See full stack trace in the browser, or rerun with --verbose.
+19:36:23 [200] /keystatic/ 2ms
+19:36:23 [ERROR] [NoMatchingRenderer] Unable to render `Keystatic`.
+
+No valid renderer was found for the `.js` file extension.
+  Hint:
+    Did you mean to enable the `@astrojs/react`, `@astrojs/preact`, `@astrojs/solid-js`, `@astrojs/vue`, `@astrojs/svelte` or `@astrojs/lit` integration?
+    
+    See https://docs.astro.build/en/guides/framework-components/ for more information on how to install and configure integrations.
+  Error reference:
+    https://docs.astro.build/en/reference/errors/no-matching-renderer/
+  Stack trace:
+    at renderFrameworkComponent (F:\laragon\www\h4ck.cl\node_modules\astro\dist\runtime\server\render\component.js:149:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+19:36:50 Configuration file updated. Restarting...
+19:36:51 [types] Generated 1ms
+19:36:51 [vite] Re-optimizing dependencies because vite config has changed
+19:36:51 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
