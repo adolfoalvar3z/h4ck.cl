@@ -7,7 +7,7 @@ import keystatic from '@keystatic/astro';
 const isBuild = process.argv.includes('build');
 
 export default defineConfig({
-    site: 'https://blog.h4ck.cl',
+    site: 'https://adolfoalvar3z.github.io',
     base: '/h4ck.cl',
 
     output: isBuild ? 'static' : 'hybrid',
