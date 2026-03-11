@@ -414,3 +414,5 @@ No valid renderer was found for the `.js` file extension.
   Stack trace:
     at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
     [...] See full stack trace in the browser, or rerun with --verbose.
+20:26:44 Configuration file updated. Restarting...
+20:26:44 [types] Generated 2ms

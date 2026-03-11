@@ -8,6 +8,8 @@ const isBuild = process.argv.includes('build');
 
 export default defineConfig({
     site: 'https://blog.h4ck.cl',
+    base: '/h4ck.cl',
+
     output: isBuild ? 'static' : 'hybrid',
     integrations: [
         react(),
