@@ -10,7 +10,7 @@ const slug = category.toLowerCase().replace(/\s+/g, '-');
 
 {variant === 'badge' ? (
     <a 
-        href={`/category/${slug}`}
+        href={`${import.meta.env.BASE_URL}category/${slug}`}
         class="inline-flex items-center gap-2 bg-hacker-red/10 text-hacker-red text-[10px] font-mono font-bold uppercase tracking-[0.2em] px-4 py-1.5 border border-hacker-red/30 no-underline transition-all duration-300 hover:bg-hacker-red hover:text-white hover:border-hacker-red shadow-[0_0_15px_rgba(255,0,0,0.1)] hover:shadow-[0_0_20px_rgba(255,0,0,0.3)]"
     >
         <span class="w-1.5 h-1.5 rounded-full bg-hacker-red animate-pulse"></span>
@@ -18,7 +18,7 @@ const slug = category.toLowerCase().replace(/\s+/g, '-');
     </a>
 ) : (
     <a 
-        href={`/category/${slug}`}
+        href={`${import.meta.env.BASE_URL}category/${slug}`}
         class="inline-flex items-center gap-2 text-hacker-red text-[10px] font-mono font-bold no-underline transition-all hover:text-white uppercase tracking-[0.2em]"
     >
         <i class="bi bi-chevron-right text-[8px]"></i>

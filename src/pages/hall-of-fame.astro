@@ -163,7 +163,7 @@ const sortedAuthors = Object.entries(authorStats)
                             </div>
 
                             <!-- Action -->
-                            <a href={`/author/${author.name.toLowerCase().replace(/\\s+/g, '-')}`} class="mt-auto group/btn flex items-center justify-center gap-3 w-full py-3 bg-white/5 hover:bg-red transition-all duration-300 rounded overflow-hidden no-underline">
+                            <a href={`${import.meta.env.BASE_URL}author/${author.name.toLowerCase().replace(/\\s+/g, '-')}`} class="mt-auto group/btn flex items-center justify-center gap-3 w-full py-3 bg-white/5 hover:bg-red transition-all duration-300 rounded overflow-hidden no-underline">
                                 <span class="text-[10px] font-mono font-black text-gray-400 group-hover/btn:text-white uppercase tracking-[0.2em]">Expediente_Completo</span>
                                 <i class="bi bi-arrow-right text-gray-600 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all"></i>
                             </a>

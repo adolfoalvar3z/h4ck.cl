@@ -51,7 +51,7 @@ const scoredPosts = allPosts
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             {scoredPosts.map(({ post, sharedTags, score }) => (
                 <a 
-                    href={`/posts/${post.slug}`} 
+                    href={`${import.meta.env.BASE_URL}posts/${post.slug}`} 
                     class="related-card group block bg-dark-100 border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 no-underline hover:-translate-y-1 hover:shadow-lg hover:shadow-red/5"
                 >
                     <!-- Image -->

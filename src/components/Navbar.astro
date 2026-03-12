@@ -50,6 +50,7 @@ const withBase = (path = '') => {
             <a href={withBase('#posts-grid')} id="nav-itels" class="nav-link text-xs font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">Inteligencia</a>
             <a href={withBase('generator')} id="nav-tools" class="nav-link text-xs font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">Herramientas</a>
             <a href={withBase('submit-post')} id="nav-submit" class="nav-link text-xs font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">Subir Post</a>
+            <a href={withBase('guia-keystatic')} id="nav-guide" class="nav-link text-xs font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">Guia Keystatic</a>
             <a href={withBase('hall-of-fame')} id="nav-hall" class="nav-link text-xs font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">Hall of Fame</a>
             <a href={withBase('about')} id="nav-about" class="nav-link text-xs font-semibold text-gray-400 hover:text-white transition-colors uppercase tracking-widest">Nosotros</a>
         </div>
@@ -94,6 +95,7 @@ const withBase = (path = '') => {
             <a href={withBase('#posts-grid')} class="text-sm text-gray-400 hover:text-white transition-colors py-2 no-underline">Inteligencia</a>
             <a href={withBase('generator')} class="text-sm text-gray-400 hover:text-white transition-colors py-2 no-underline">Herramientas</a>
             <a href={withBase('submit-post')} class="text-sm text-gray-400 hover:text-white transition-colors py-2 no-underline">Subir Post</a>
+            <a href={withBase('guia-keystatic')} class="text-sm text-gray-400 hover:text-white transition-colors py-2 no-underline">Guia Keystatic</a>
             <a href={withBase('hall-of-fame')} class="text-sm text-gray-400 hover:text-white transition-colors py-2 no-underline">Hall of Fame</a>
             <a href={withBase('about')} class="text-sm text-gray-400 hover:text-white transition-colors py-2 no-underline">Nosotros</a>
         </div>
@@ -117,6 +119,8 @@ const withBase = (path = '') => {
         document.getElementById('nav-tools')?.classList.add('text-white');
     } else if (normalizedPath.includes('submit-post')) {
         document.getElementById('nav-submit')?.classList.add('text-white');
+    } else if (normalizedPath.includes('guia-keystatic')) {
+        document.getElementById('nav-guide')?.classList.add('text-white');
     } else if (normalizedPath.includes('hall-of-fame')) {
         document.getElementById('nav-hall')?.classList.add('text-white');
     } else if (normalizedPath.includes('about')) {

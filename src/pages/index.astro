@@ -52,7 +52,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
 
                         <!-- Meta + CTA -->
                         <div class="flex flex-wrap items-center gap-6">
-                            <a href={`/posts/${featuredPost.slug}`} class="inline-flex items-center gap-2 bg-red hover:bg-red-dark text-white font-bold text-sm px-8 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 no-underline">
+                            <a href={`${import.meta.env.BASE_URL}posts/${featuredPost.slug}`} class="inline-flex items-center gap-2 bg-red hover:bg-red-dark text-white font-bold text-sm px-8 py-3.5 rounded-lg transition-all hover:-translate-y-0.5 no-underline">
                                 Leer reporte
                                 <i class="bi bi-arrow-right"></i>
                             </a>
@@ -133,7 +133,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div class="absolute inset-0 bg-gradient-to-t from-dark-100 to-transparent opacity-50"></div>
-                        <a href={`/category/${post.data.category.toLowerCase().replace(/\s+/g, '-')}`} class="absolute top-3 left-3 bg-dark/80 backdrop-blur-sm text-gray-300 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-dark-300 no-underline hover:text-red hover:border-red/30 transition-all">
+                        <a href={`${import.meta.env.BASE_URL}category/${post.data.category.toLowerCase().replace(/\s+/g, '-')}`} class="absolute top-3 left-3 bg-dark/80 backdrop-blur-sm text-gray-300 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-dark-300 no-underline hover:text-red hover:border-red/30 transition-all">
                             {post.data.category}
                         </a>
                     </div>
@@ -164,7 +164,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
                         </div>
 
                         <!-- CTA -->
-                        <a href={`/posts/${post.slug}`} class="mt-auto inline-flex items-center gap-2 text-red text-xs font-semibold no-underline group/link hover:gap-3 transition-all">
+                        <a href={`${import.meta.env.BASE_URL}posts/${post.slug}`} class="mt-auto inline-flex items-center gap-2 text-red text-xs font-semibold no-underline group/link hover:gap-3 transition-all">
                             Leer más
                             <i class="bi bi-arrow-right transition-transform group-hover/link:translate-x-1"></i>
                         </a>
@@ -197,7 +197,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
                         </p>
                     </div>
                     {eventPosts.length > 3 && (
-                        <a href="/category/eventos" class="inline-flex items-center gap-2 text-xs font-mono text-gray-400 hover:text-white transition-colors uppercase tracking-wider bg-dark border border-dark-300 px-4 py-2 rounded-lg hover:border-gray-500 flex-shrink-0">
+                        <a href={`${import.meta.env.BASE_URL}category/eventos`} class="inline-flex items-center gap-2 text-xs font-mono text-gray-400 hover:text-white transition-colors uppercase tracking-wider bg-dark border border-dark-300 px-4 py-2 rounded-lg hover:border-gray-500 flex-shrink-0">
                             Ver todos <i class="bi bi-grid"></i>
                         </a>
                     )}
@@ -214,7 +214,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
                             const month = dateObj.toLocaleDateString('es-ES', { month: 'short' }).substring(0, 3);
                             
                             return (
-                                <a href={`/posts/${event.slug}`} class="block group/card bg-dark border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(255,0,0,0.1)] flex flex-col">
+                                <a href={`${import.meta.env.BASE_URL}posts/${event.slug}`} class="block group/card bg-dark border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(255,0,0,0.1)] flex flex-col">
                                     <div class="relative aspect-video overflow-hidden border-b border-dark-300">
                                         <div class="absolute inset-0 bg-dark/60 z-10 group-hover/card:bg-transparent transition-colors duration-500"></div>
                                         <img src={event.data.image} alt={event.data.title} class="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105" />

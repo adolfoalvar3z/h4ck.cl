@@ -9,7 +9,7 @@ const isBuild = process.argv.includes('build');
 export default defineConfig({
     site: isBuild ? 'https://adolfoalvar3z.github.io' : 'http://localhost:4321',
     base: isBuild ? '/h4ck.cl/' : '/',
-    output: isBuild ? 'hybrid' : 'hybrid',
+    output: isBuild ? 'static' : 'hybrid',
     integrations: [
         react(),
         isBuild ? null : keystatic()

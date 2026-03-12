@@ -35,7 +35,7 @@ const authorCounts = allAuthors.map(auth => ({
     <section class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
         <!-- Header -->
         <div class="mb-14">
-            <a href="/hall-of-fame" class="inline-flex items-center gap-2 text-gray-500 hover:text-white text-xs font-mono transition-colors mb-8 no-underline uppercase tracking-wider">
+            <a href={`${import.meta.env.BASE_URL}hall-of-fame`} class="inline-flex items-center gap-2 text-gray-500 hover:text-white text-xs font-mono transition-colors mb-8 no-underline uppercase tracking-wider">
                 <i class="bi bi-arrow-left"></i> Volver al muro
             </a>
 
@@ -66,7 +66,7 @@ const authorCounts = allAuthors.map(auth => ({
                             <div class="aspect-video overflow-hidden relative">
                                 <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-dark-100 to-transparent opacity-50"></div>
-                                <a href={`/category/${post.data.category.toLowerCase().replace(/\s+/g, '-')}`} class="absolute top-3 left-3 bg-dark/80 backdrop-blur-sm text-gray-300 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-dark-300 no-underline hover:text-red hover:border-red/30 transition-all">
+                                <a href={`${import.meta.env.BASE_URL}category/${post.data.category.toLowerCase().replace(/\s+/g, '-')}`} class="absolute top-3 left-3 bg-dark/80 backdrop-blur-sm text-gray-300 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-dark-300 no-underline hover:text-red hover:border-red/30 transition-all">
                                     {post.data.category}
                                 </a>
                             </div>
@@ -90,7 +90,7 @@ const authorCounts = allAuthors.map(auth => ({
 
                                 <PostTags tags={post.data.tags} />
 
-                                <a href={`/posts/${post.slug}`} class="mt-4 inline-flex items-center gap-2 text-red text-xs font-semibold no-underline group/link hover:gap-3 transition-all">
+                                <a href={`${import.meta.env.BASE_URL}posts/${post.slug}`} class="mt-4 inline-flex items-center gap-2 text-red text-xs font-semibold no-underline group/link hover:gap-3 transition-all">
                                     Leer protocolo
                                     <i class="bi bi-arrow-right transition-transform group-hover/link:translate-x-1"></i>
                                 </a>
@@ -111,7 +111,7 @@ const authorCounts = allAuthors.map(auth => ({
                         <nav class="flex flex-col gap-1 max-h-[60vh] overflow-y-auto pr-2 custom-scrollbar">
                             {authorCounts.map(auth => (
                                 <a 
-                                    href={`/author/${auth.slug}`}
+                                    href={`${import.meta.env.BASE_URL}author/${auth.slug}`}
                                     class:list={[
                                         "flex items-center justify-between px-3 py-2.5 rounded-lg text-xs font-mono transition-all no-underline",
                                         auth.active 
