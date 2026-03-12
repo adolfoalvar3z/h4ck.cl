@@ -1,0 +1,127 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const repoOwner = 'adolfoalvar3z';
+const repoName = 'h4ck.cl';
+const templateName = 'post_submission.md';
+const fallbackIssueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?template=${templateName}`;
+---
+
+<Layout title="Subir Post" description="Envia tu post facilmente por GitHub para revision y publicacion.">
+  <section class="max-w-5xl mx-auto px-6 lg:px-8 py-12">
+    <div class="mb-8">
+      <p class="text-[11px] font-mono tracking-widest uppercase text-red">Community</p>
+      <h1 class="text-3xl sm:text-4xl font-black text-white mt-2">Sube tu post en 1 minuto</h1>
+      <p class="text-gray-400 mt-3 max-w-3xl">
+        Completa este formulario y se abrira un issue en GitHub con tu propuesta. Luego la revisamos y la publicamos.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-dark-100 border border-dark-300 rounded-xl p-6 space-y-4">
+        <div>
+          <label for="post-title" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Titulo</label>
+          <input id="post-title" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="Ej: Analisis de phishing en LATAM" />
+        </div>
+
+        <div>
+          <label for="post-author" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Autor alias</label>
+          <input id="post-author" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="Tu alias" />
+        </div>
+
+        <div>
+          <label for="post-category" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Categoria</label>
+          <input id="post-category" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="INTEL, OSINT, MALWARE, etc" />
+        </div>
+
+        <div>
+          <label for="post-summary" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Resumen corto</label>
+          <textarea id="post-summary" rows="3" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none resize-none" placeholder="Cuenta en 2 lineas de que trata el post"></textarea>
+        </div>
+
+        <div>
+          <label for="post-content" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Contenido markdown</label>
+          <textarea id="post-content" rows="10" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none font-mono" placeholder="# Titulo principal&#10;&#10;Escribe aqui tu post en markdown..."></textarea>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-3 pt-2">
+          <button id="open-github-issue" class="inline-flex items-center justify-center gap-2 bg-red hover:bg-red-dark text-white text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors">
+            <i class="bi bi-github"></i> Enviar a GitHub
+          </button>
+          <a href={fallbackIssueUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-dark border border-dark-300 hover:border-red text-gray-300 hover:text-white text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors no-underline">
+            Abrir plantilla manual
+          </a>
+        </div>
+
+        <p id="submit-status" class="text-xs text-gray-500 font-mono"></p>
+      </div>
+
+      <aside class="bg-dark-100 border border-dark-300 rounded-xl p-6">
+        <h2 class="text-white font-bold text-lg mb-4">Como funciona</h2>
+        <ol class="space-y-3 text-sm text-gray-300">
+          <li><span class="text-red font-mono">1.</span> Tu completas el formulario.</li>
+          <li><span class="text-red font-mono">2.</span> Se abre un issue en GitHub con tu contenido.</li>
+          <li><span class="text-red font-mono">3.</span> Revisamos y lo pasamos al blog.</li>
+        </ol>
+
+        <div class="mt-6 p-4 border border-dark-300 rounded-lg bg-dark">
+          <p class="text-xs text-gray-400 leading-relaxed">
+            Si prefieres, tambien puedes usar el <a href="/generator" class="text-red hover:text-red-light">Generador</a> para escribir el markdown y luego pegarlo aqui.
+          </p>
+        </div>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<script define:vars={{ repoOwner, repoName, templateName }}>
+  const titleEl = document.getElementById('post-title');
+  const authorEl = document.getElementById('post-author');
+  const categoryEl = document.getElementById('post-category');
+  const summaryEl = document.getElementById('post-summary');
+  const contentEl = document.getElementById('post-content');
+  const statusEl = document.getElementById('submit-status');
+  const openBtn = document.getElementById('open-github-issue');
+
+  function getValue(el) {
+    return el && 'value' in el ? el.value.trim() : '';
+  }
+
+  function buildIssueBody() {
+    const title = getValue(titleEl) || 'Untitled post';
+    const author = getValue(authorEl) || 'Community';
+    const category = getValue(categoryEl) || 'INTEL';
+    const summary = getValue(summaryEl) || 'No summary provided.';
+    const content = getValue(contentEl) || '# Main title\\n\\nPost content here.';
+
+    return [
+      '## Post metadata',
+      `- Title: ${title}`,
+      `- Author alias: ${author}`,
+      `- Category: ${category}`,
+      '- Tags (comma separated): ',
+      '- Read time (example: 5 MIN READ): ',
+      '- Cover image URL: ',
+      `- Short summary: ${summary}`,
+      '',
+      '## Post markdown',
+      '```md',
+      content,
+      '```',
+      '',
+      '## Checklist',
+      '- [x] I confirm this content is original or I have rights to publish it.',
+      '- [x] I accept that editors may adjust format before publishing.',
+      '- [x] I reviewed spelling and links.'
+    ].join('\\n');
+  }
+
+  openBtn?.addEventListener('click', () => {
+    const title = getValue(titleEl) || 'Post submission';
+    const body = buildIssueBody();
+    const issueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?template=${templateName}&title=${encodeURIComponent(`[POST] ${title}`)}&body=${encodeURIComponent(body)}`;
+
+    statusEl.textContent = 'Opening GitHub issue...';
+    window.open(issueUrl, '_blank', 'noopener,noreferrer');
+  });
+</script>

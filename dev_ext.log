@@ -1,0 +1,34 @@
+
+> h4ck-cl-astro@1.0.0 dev
+> astro dev --host
+
+20:42:00 [types] Generated 2ms
+20:42:01 [vite] Port 4321 is in use, trying another one...
+
+ astro  v4.16.19 ready in 346 ms
+
+┃ Local    http://localhost:4322/
+┃ Network  http://192.168.3.2:4322/
+           http://10.10.10.1:4322/
+           http://192.168.11.1:4322/
+           http://172.29.192.1:4322/
+
+20:42:01 watching for file changes...
+20:42:28 [200] /keystatic 23ms
+20:42:28 [200] /keystatic/ 7ms
+20:42:33 [200] /keystatic 4ms
+20:42:43 [200] /keystatic 4ms
+20:42:45 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/superstruct/dist/index.mjs" points to missing source files
+20:42:45 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/@urql/exchange-graphcache/dist/urql-exchange-graphcache-extras.mjs" points to missing source files
+20:42:45 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/urql/dist/urql.es.js" points to missing source files
+20:42:45 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/@urql/exchange-persisted/dist/urql-exchange-persisted.mjs" points to missing source files
+20:42:45 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/@urql/exchange-auth/dist/urql-exchange-auth.mjs" points to missing source files
+20:42:45 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/@urql/exchange-graphcache/dist/urql-exchange-graphcache.mjs" points to missing source files
+20:42:46 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/@0no-co/graphql.web/dist/graphql.web.mjs" points to missing source files
+20:42:46 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/@urql/core/dist/urql-core.mjs" points to missing source files
+20:42:47 [WARN] [vite] Sourcemap for "F:/laragon/www/h4ck.cl/node_modules/@urql/core/dist/urql-core-chunk.mjs" points to missing source files
+20:43:20 [200] /keystatic 10ms
+20:43:20 [watch] keystatic_page.html
+20:43:45 [200] /keystatic 3ms
+21:24:51 Configuration file updated. Restarting...
+21:24:51 [types] Generated 2ms

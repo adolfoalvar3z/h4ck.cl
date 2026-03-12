@@ -421,3 +421,29 @@ No valid renderer was found for the `.js` file extension.
 20:32:59 [ERROR] [router] Request URLs for public/ assets must also include your base. "/h4ck.cl/favicon.ico" expected, but received "/favicon.ico".
 20:33:39 Configuration file updated. Restarting...
 20:33:39 [types] Generated 1ms
+20:37:37 Configuration file updated. Restarting...
+20:37:37 [types] Generated 1ms
+20:37:37 [vite] Re-optimizing dependencies because vite config has changed
+20:38:25 Configuration file updated. Restarting...
+20:38:25 [types] Generated 2ms
+20:39:42 Configuration file updated. Restarting...
+20:39:42 [types] Generated 1ms
+20:39:42 [vite] Re-optimizing dependencies because vite config has changed
+20:39:42 [vite] Port 4321 is in use, trying another one...
+20:39:42 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+20:40:07 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+20:40:10 [ERROR] Expected "}" but found ":"
+  Stack trace:
+    at failureErrorWithLog (F:\laragon\www\h4ck.cl\node_modules\esbuild\lib\main.js:1472:15)
+    [...] See full stack trace in the browser, or rerun with --verbose.
+20:43:20 [watch] keystatic_page.html
+21:24:51 Configuration file updated. Restarting...
+21:24:51 [types] Generated 1ms
+21:24:51 [vite] Re-optimizing dependencies because vite config has changed
+^C
