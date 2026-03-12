@@ -8,7 +8,7 @@ const isBuild = process.argv.includes('build');
 
 export default defineConfig({
     site: isBuild ? 'https://adolfoalvar3z.github.io' : 'http://localhost:4321',
-    base: isBuild ? '/h4ck.cl' : '/',
+    base: isBuild ? '/h4ck.cl/' : '/',
     output: isBuild ? 'static' : 'hybrid',
     integrations: [
         react(),
@@ -18,3 +18,4 @@ export default defineConfig({
         plugins: [tailwindcss()]
     }
 });
+
