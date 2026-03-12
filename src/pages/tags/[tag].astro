@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import PostTags from '../../components/PostTags.astro';
 import CategoryBadge from '../../components/CategoryBadge.astro';
+import { sortByPostDateDesc } from '../../lib/dates';
 
 export async function getStaticPaths() {
     const posts = await getCollection('blog');
@@ -12,8 +13,7 @@ export async function getStaticPaths() {
         params: { tag: tag.toLowerCase() },
         props: {
             tag,
-            posts: posts.filter(p => p.data.tags.some(t => t.toLowerCase() === tag.toLowerCase()))
-                .sort((a, b) => b.data.date.localeCompare(a.data.date))
+            posts: sortByPostDateDesc(posts.filter(p => p.data.tags.some(t => t.toLowerCase() === tag.toLowerCase())))
         },
     }));
 }
@@ -33,7 +33,7 @@ const tagCounts = allTags.map(t => ({
 
 <Layout title={`#${tag} — Tag`} description={`Todos los reportes con la etiqueta: ${tag}`}>
 
-    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+    <section class="max-w-[88rem] mx-auto px-6 lg:px-8 py-20">
         <!-- Header -->
         <div class="mb-14">
             <a href={import.meta.env.BASE_URL} class="inline-flex items-center gap-2 text-gray-500 hover:text-white text-xs font-mono transition-colors mb-8 no-underline uppercase tracking-wider">
@@ -61,7 +61,7 @@ const tagCounts = allTags.map(t => ({
                     {posts.map(post => (
                         <article class="group bg-dark-100 border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-red/5 flex flex-col">
                             <div class="aspect-video overflow-hidden relative">
-                                <img src={post.data.image} alt={post.data.title} class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                                <img src={post.data.image} alt={post.data.title} loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
                                 <div class="absolute inset-0 bg-gradient-to-t from-dark-100 to-transparent opacity-50"></div>
                                 <span class="absolute top-3 left-3 bg-dark/80 backdrop-blur-sm text-gray-300 text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-dark-300">
                                     {post.data.category}
@@ -132,3 +132,4 @@ const tagCounts = allTags.map(t => ({
     </section>
 
 </Layout>
+

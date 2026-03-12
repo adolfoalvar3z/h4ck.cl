@@ -111,3 +111,70 @@
 21:47:13 [watch] src/pages/index.astro
 21:47:13 [watch] src/pages/submit-post.astro
 21:47:14 [200] /submit-post 8ms
+21:53:35 [watch] src/components/Navbar.astro
+21:53:35 [watch] src/layouts/Layout.astro
+21:53:35 [watch] src/pages/index.astro
+21:53:35 [watch] src/pages/about.astro
+21:53:36 [200] /submit-post 11ms
+21:53:52 [watch] src/pages/generator.astro
+21:53:52 [watch] src/pages/guia-keystatic.astro
+21:53:53 [200] /submit-post 5ms
+21:55:06 [watch] src/pages/submit-post.astro
+21:55:06 [watch] src/components/Navbar.astro
+21:55:06 [watch] src/pages/author/[author].astro
+21:55:06 [watch] src/pages/category/[slug].astro
+21:55:06 [watch] src/pages/posts/[slug].astro
+21:55:06 [watch] src/pages/tags/[tag].astro
+21:55:07 [200] /submit-post 7ms
+21:56:58 [200] / 8ms
+21:58:37 [watch] src/pages/posts/[slug].astro
+21:58:37 [watch] src/pages/category/[slug].astro
+21:58:37 [watch] src/pages/tags/[tag].astro
+21:58:37 [watch] src/pages/author/[author].astro
+21:58:37 [watch] src/pages/hall-of-fame.astro
+21:58:37 [watch] src/components/RelatedPosts.astro
+21:58:37 [watch] src/pages/index.astro
+21:58:37 [watch] src/components/Navbar.astro
+21:58:37 [200] / 14ms
+21:58:46 [200] /about 6ms
+21:58:57 [200] /submit-post 7ms
+21:59:17 [watch] src/pages/posts/[slug].astro
+21:59:17 [watch] src/components/Navbar.astro
+21:59:17 [200] /submit-post 5ms
+21:59:42 [watch] src/layouts/Layout.astro
+21:59:42 [200] /submit-post 6ms
+22:00:56 [200] /submit-post 8ms
+22:00:57 [200] /submit-post 6ms
+22:00:57 [200] /submit-post 5ms
+22:00:58 [200] /submit-post 4ms
+22:01:07 [watch] src/pages/posts/[slug].astro
+22:01:07 [200] /submit-post 6ms
+22:01:20 [watch] src/pages/submit-post.astro
+22:01:20 [200] /submit-post 5ms
+22:01:44 [200] / 13ms
+22:03:06 [200] / 9ms
+22:03:09 [watch] src/pages/submit-post.astro
+22:03:09 [200] / 12ms
+22:03:20 [200] / 8ms
+22:03:20 [200] / 7ms
+22:03:21 [200] / 7ms
+22:03:46 [200] /submit-post 6ms
+22:06:50 [200] /submit-post 6ms
+22:06:51 [200] /submit-post 6ms
+22:07:19 [watch] src/pages/submit-post.astro
+22:07:19 [200] /submit-post 4ms
+22:07:35 [200] /submit-post 6ms
+22:10:52 [200] /submit-post 6ms
+22:12:25 [watch] src/pages/submit-post.astro
+22:12:26 [200] /submit-post 3ms
+22:16:09 [watch] src/pages/submit-post.astro
+22:16:09 [200] /submit-post 6ms
+22:17:12 [404] /images/chuncoco.png 1ms
+22:17:12 [404] /images/chuncoco.png 0ms
+22:17:16 [404] /images/chuncoco.png 0ms
+22:17:16 [404] /images/chuncoco.png 1ms
+22:17:40 [404] /images/chuncoco.png 0ms
+22:18:04 [404] /images/chuncoco.png 0ms
+22:18:06 [404] /images/chuncoco.png 0ms
+22:18:09 [404] /images/chuncoco.png 1ms
+22:18:11 [404] /images/chuncoco.png 1ms

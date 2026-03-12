@@ -3,35 +3,73 @@ import Layout from '../layouts/Layout.astro';
 
 const repoOwner = 'adolfoalvar3z';
 const repoName = 'h4ck.cl';
-const templateName = 'post_submission.md';
-const fallbackIssueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?template=${templateName}`;
+const targetPath = 'src/content/blog';
+const targetTreeUrl = `https://github.com/${repoOwner}/${repoName}/tree/main/${targetPath}`;
+const imageUploadUrl = `https://github.com/${repoOwner}/${repoName}/upload/main/public/images`;
 ---
 
-<Layout title="Subir Post" description="Envia tu post facilmente por GitHub para revision y publicacion.">
-  <section class="max-w-5xl mx-auto px-6 lg:px-8 py-12">
+<Layout title="Subir Post" description="Genera un markdown listo para publicar en src/content/blog.">
+  <section class="max-w-[88rem] mx-auto px-6 lg:px-8 py-12">
     <div class="mb-8">
       <p class="text-[11px] font-mono tracking-widest uppercase text-red">Community</p>
-      <h1 class="text-3xl sm:text-4xl font-black text-white mt-2">Sube tu post en 1 minuto</h1>
-      <p class="text-gray-400 mt-3 max-w-3xl">
-        Completa este formulario y se abrira un issue en GitHub con tu propuesta. Luego la revisamos y la publicamos.
+      <h1 class="text-3xl sm:text-4xl font-black text-white mt-2">Generador de post para GitHub</h1>
+      <p class="text-gray-400 mt-3 max-w-4xl">
+        Escribe en editor enriquecido o markdown. El resultado final siempre se genera como markdown para <span class="text-gray-200 font-mono">src/content/blog</span>.
       </p>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <div class="bg-dark-100 border border-dark-300 rounded-xl p-6 space-y-4">
+    <div class="grid grid-cols-1 xl:grid-cols-[1.35fr_1fr] gap-6">
+      <div class="bg-dark-100 border border-dark-300 rounded-xl p-6 md:p-7 space-y-4">
         <div>
           <label for="post-title" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Titulo</label>
           <input id="post-title" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="Ej: Analisis de phishing en LATAM" />
         </div>
 
-        <div>
-          <label for="post-author" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Autor alias</label>
-          <input id="post-author" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="Tu alias" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="post-author" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Autor alias</label>
+            <input id="post-author" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="Tu alias" />
+          </div>
+          <div>
+            <label for="post-category" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Categoria</label>
+            <input id="post-category" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="INTEL, OSINT, MALWARE, etc" />
+          </div>
         </div>
 
-        <div>
-          <label for="post-category" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Categoria</label>
-          <input id="post-category" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="INTEL, OSINT, MALWARE, etc" />
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="post-date" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Fecha</label>
+            <input id="post-date" type="date" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" />
+          </div>
+          <div class="flex items-end">
+            <label for="post-featured" class="w-full flex items-center gap-3 bg-dark border border-dark-300 rounded-lg px-4 py-2.5 cursor-pointer">
+              <input id="post-featured" type="checkbox" class="accent-red h-4 w-4" />
+              <span class="text-sm text-gray-300">Marcar como feature</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="post-readtime" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Read time</label>
+            <input id="post-readtime" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="8 MIN READ" />
+          </div>
+          <div>
+            <label for="post-tags" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Tags (coma)</label>
+            <input id="post-tags" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="GitHub, Markdown, Tutorial" />
+          </div>
+        </div>
+
+        <div class="space-y-3">
+          <label for="post-image" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Imagen portada (URL o /images/...)</label>
+          <input id="post-image" type="text" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none" placeholder="/images/mi-portada.png" />
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-2">
+            <input id="post-image-file" type="file" accept="image/*" class="w-full bg-dark border border-dark-300 rounded-lg px-3 py-2 text-xs text-gray-300 file:mr-3 file:border-0 file:bg-red file:text-white file:px-3 file:py-1.5 file:rounded-md file:cursor-pointer" />
+            <a href={imageUploadUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-dark border border-dark-300 hover:border-red text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg transition-colors no-underline">
+              <i class="bi bi-cloud-arrow-up"></i> Subir imagen
+            </a>
+          </div>
+          <p class="text-[11px] text-gray-500">Selecciona imagen para autocompletar ruta. Luego subela en GitHub a <span class="font-mono">public/images</span>.</p>
         </div>
 
         <div>
@@ -39,89 +77,413 @@ const fallbackIssueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new
           <textarea id="post-summary" rows="3" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none resize-none" placeholder="Cuenta en 2 lineas de que trata el post"></textarea>
         </div>
 
-        <div>
-          <label for="post-content" class="block text-[11px] font-mono uppercase tracking-wider text-gray-500 mb-1">Contenido markdown</label>
-          <textarea id="post-content" rows="10" class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-2.5 text-sm text-gray-200 focus:border-red focus:outline-none font-mono" placeholder="# Titulo principal&#10;&#10;Escribe aqui tu post en markdown..."></textarea>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-3">
+            <label class="block text-[11px] font-mono uppercase tracking-wider text-gray-500">Contenido</label>
+            <div class="inline-flex bg-dark border border-dark-300 rounded-lg p-1">
+              <button id="mode-rich" type="button" class="px-3 py-1.5 text-xs rounded-md bg-red text-white">Enriquecido</button>
+              <button id="mode-md" type="button" class="px-3 py-1.5 text-xs rounded-md text-gray-300">Markdown</button>
+            </div>
+          </div>
+
+          <div id="rich-toolbar" class="flex flex-wrap gap-2">
+            <button type="button" data-cmd="bold" class="px-3 py-1.5 text-xs bg-dark border border-dark-300 rounded-lg text-gray-300">Negrita</button>
+            <button type="button" data-cmd="italic" class="px-3 py-1.5 text-xs bg-dark border border-dark-300 rounded-lg text-gray-300">Cursiva</button>
+            <button type="button" data-block="h2" class="px-3 py-1.5 text-xs bg-dark border border-dark-300 rounded-lg text-gray-300">H2</button>
+            <button type="button" data-block="h3" class="px-3 py-1.5 text-xs bg-dark border border-dark-300 rounded-lg text-gray-300">H3</button>
+            <button type="button" data-cmd="insertUnorderedList" class="px-3 py-1.5 text-xs bg-dark border border-dark-300 rounded-lg text-gray-300">Lista</button>
+            <button type="button" id="insert-link" class="px-3 py-1.5 text-xs bg-dark border border-dark-300 rounded-lg text-gray-300">Link</button>
+            <button type="button" id="insert-image-url" class="px-3 py-1.5 text-xs bg-dark border border-dark-300 rounded-lg text-gray-300">Imagen URL</button>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-2">
+            <input id="inline-image-file" type="file" accept="image/*" class="w-full bg-dark border border-dark-300 rounded-lg px-3 py-2 text-xs text-gray-300 file:mr-3 file:border-0 file:bg-red file:text-white file:px-3 file:py-1.5 file:rounded-md file:cursor-pointer" />
+            <button id="insert-inline-image" type="button" class="inline-flex items-center justify-center gap-2 bg-dark border border-dark-300 hover:border-red text-gray-300 hover:text-white text-xs font-bold uppercase tracking-wider px-4 py-2.5 rounded-lg transition-colors">
+              <i class="bi bi-image"></i> Insertar imagen contenido
+            </button>
+          </div>
+
+          <div id="rich-editor" contenteditable="true" class="min-h-[320px] bg-dark border border-dark-300 rounded-lg px-4 py-3 text-sm text-gray-200 focus:outline-none focus:border-red overflow-auto"></div>
+          <textarea id="post-content" rows="14" class="hidden w-full bg-dark border border-dark-300 rounded-lg px-4 py-3 text-sm text-gray-200 focus:border-red focus:outline-none font-mono" placeholder="# Titulo principal&#10;&#10;Escribe aqui tu post en markdown..."></textarea>
         </div>
 
         <div class="flex flex-col sm:flex-row gap-3 pt-2">
-          <button id="open-github-issue" class="inline-flex items-center justify-center gap-2 bg-red hover:bg-red-dark text-white text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors">
-            <i class="bi bi-github"></i> Enviar a GitHub
+          <button id="generate-md" type="button" class="inline-flex items-center justify-center gap-2 bg-red hover:bg-red-dark text-white text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors">
+            <i class="bi bi-file-earmark-code"></i> Generar markdown
           </button>
-          <a href={fallbackIssueUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 bg-dark border border-dark-300 hover:border-red text-gray-300 hover:text-white text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors no-underline">
-            Abrir plantilla manual
-          </a>
+          <button id="copy-md" type="button" class="inline-flex items-center justify-center gap-2 bg-dark border border-dark-300 hover:border-red text-gray-300 hover:text-white text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors">
+            <i class="bi bi-clipboard"></i> Copiar markdown
+          </button>
+          <button id="open-github-new" type="button" class="inline-flex items-center justify-center gap-2 bg-dark border border-dark-300 hover:border-red text-gray-300 hover:text-white text-sm font-bold uppercase tracking-wider px-5 py-3 rounded-lg transition-colors">
+            <i class="bi bi-github"></i> Abrir en GitHub
+          </button>
         </div>
 
         <p id="submit-status" class="text-xs text-gray-500 font-mono"></p>
       </div>
 
-      <aside class="bg-dark-100 border border-dark-300 rounded-xl p-6">
-        <h2 class="text-white font-bold text-lg mb-4">Como funciona</h2>
-        <ol class="space-y-3 text-sm text-gray-300">
-          <li><span class="text-red font-mono">1.</span> Tu completas el formulario.</li>
-          <li><span class="text-red font-mono">2.</span> Se abre un issue en GitHub con tu contenido.</li>
-          <li><span class="text-red font-mono">3.</span> Revisamos y lo pasamos al blog.</li>
-        </ol>
-
-        <div class="mt-6 p-4 border border-dark-300 rounded-lg bg-dark">
-          <p class="text-xs text-gray-400 leading-relaxed">
-            Si prefieres, tambien puedes usar el <a href={`${import.meta.env.BASE_URL}generator`} class="text-red hover:text-red-light">Generador</a> para escribir el markdown y luego pegarlo aqui.
-          </p>
-        </div>
+      <aside class="bg-dark-100 border border-dark-300 rounded-xl p-6 md:p-7 space-y-4">
+        <h2 class="text-white font-bold text-lg">Salida generada</h2>
+        <p class="text-xs text-gray-400">Archivo destino: <span id="target-file" class="text-gray-200 font-mono">(sin generar)</span></p>
+        <p class="text-xs text-gray-500">Imagenes en <span class="font-mono text-gray-300">public/images</span>.</p>
+        <textarea id="generated-md" rows="22" readonly class="w-full bg-dark border border-dark-300 rounded-lg px-4 py-3 text-xs text-gray-200 font-mono focus:outline-none"></textarea>
+        <a href={targetTreeUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 text-xs text-red hover:text-red-light no-underline">
+          <i class="bi bi-box-arrow-up-right"></i> Abrir carpeta destino en GitHub
+        </a>
       </aside>
     </div>
   </section>
 </Layout>
 
-<script define:vars={{ repoOwner, repoName, templateName }}>
+<script define:vars={{ repoOwner, repoName, targetPath }}>
   const titleEl = document.getElementById('post-title');
   const authorEl = document.getElementById('post-author');
   const categoryEl = document.getElementById('post-category');
+  const dateEl = document.getElementById('post-date');
+  const featuredEl = document.getElementById('post-featured');
+  const readTimeEl = document.getElementById('post-readtime');
+  const tagsEl = document.getElementById('post-tags');
+  const imageEl = document.getElementById('post-image');
+  const imageFileEl = document.getElementById('post-image-file');
   const summaryEl = document.getElementById('post-summary');
-  const contentEl = document.getElementById('post-content');
+
+  const modeRichBtn = document.getElementById('mode-rich');
+  const modeMdBtn = document.getElementById('mode-md');
+  const richToolbarEl = document.getElementById('rich-toolbar');
+  const richEditorEl = document.getElementById('rich-editor');
+  const markdownEl = document.getElementById('post-content');
+
+  const inlineImageFileEl = document.getElementById('inline-image-file');
+  const insertInlineImageBtn = document.getElementById('insert-inline-image');
+
+  const generateBtn = document.getElementById('generate-md');
+  const copyBtn = document.getElementById('copy-md');
+  const githubBtn = document.getElementById('open-github-new');
+  const outputEl = document.getElementById('generated-md');
+  const targetFileEl = document.getElementById('target-file');
   const statusEl = document.getElementById('submit-status');
-  const openBtn = document.getElementById('open-github-issue');
+
+  let editorMode = 'rich';
 
   function getValue(el) {
     return el && 'value' in el ? el.value.trim() : '';
   }
 
-  function buildIssueBody() {
-    const title = getValue(titleEl) || 'Untitled post';
-    const author = getValue(authorEl) || 'Community';
-    const category = getValue(categoryEl) || 'INTEL';
-    const summary = getValue(summaryEl) || 'No summary provided.';
-    const content = getValue(contentEl) || '# Main title\\n\\nPost content here.';
-
-    return [
-      '## Post metadata',
-      `- Title: ${title}`,
-      `- Author alias: ${author}`,
-      `- Category: ${category}`,
-      '- Tags (comma separated): ',
-      '- Read time (example: 5 MIN READ): ',
-      '- Cover image URL: ',
-      `- Short summary: ${summary}`,
-      '',
-      '## Post markdown',
-      '```md',
-      content,
-      '```',
-      '',
-      '## Checklist',
-      '- [x] I confirm this content is original or I have rights to publish it.',
-      '- [x] I accept that editors may adjust format before publishing.',
-      '- [x] I reviewed spelling and links.'
-    ].join('\\n');
+  function setStatus(message, isError = false) {
+    if (!statusEl) return;
+    statusEl.textContent = message;
+    statusEl.className = isError ? 'text-xs text-red font-mono' : 'text-xs text-gray-500 font-mono';
   }
 
-  openBtn?.addEventListener('click', () => {
-    const title = getValue(titleEl) || 'Post submission';
-    const body = buildIssueBody();
-    const issueUrl = `https://github.com/${repoOwner}/${repoName}/issues/new?template=${templateName}&title=${encodeURIComponent(`[POST] ${title}`)}&body=${encodeURIComponent(body)}`;
+  function slugify(text) {
+    return text
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/^-+|-+$/g, '') || 'nuevo-post';
+  }
 
-    statusEl.textContent = 'Opening GitHub issue...';
-    window.open(issueUrl, '_blank', 'noopener,noreferrer');
+  function formatDate(value) {
+    if (!value) return '';
+    const parts = value.split('-');
+    if (parts.length !== 3) return '';
+    const yyyy = parts[0];
+    const mm = parts[1];
+    const dd = parts[2];
+    const months = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+    const month = months[Math.max(0, Number(mm) - 1)] || 'JAN';
+    return `${month} ${dd}, ${yyyy}`;
+  }
+
+  function tagsToYaml(input) {
+    const tags = input.split(',').map(t => t.trim()).filter(Boolean);
+    if (tags.length === 0) return '[]';
+    return `[${tags.map(t => `"${t.replace(/"/g, "'")}"`).join(', ')}]`;
+  }
+
+  function escapeQuotes(text) {
+    return (text || '').replace(/"/g, "'");
+  }
+
+  function escapeHtml(text) {
+    return text
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function markdownToHtml(md) {
+    let html = escapeHtml(md || '');
+    html = html.replace(/```([\s\S]*?)```/g, (_, code) => `<pre><code>${code.trim()}</code></pre>`);
+    html = html.replace(/^###\s+(.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^##\s+(.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^#\s+(.+)$/gm, '<h1>$1</h1>');
+    html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img alt="$1" src="$2" />');
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
+    html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+    html = html.replace(/(?:^|\n)((?:[-*]\s.+(?:\n|$))+)/g, (block) => {
+      const items = block.trim().split('\n').map(line => `<li>${line.replace(/^[-*]\s/, '')}</li>`).join('');
+      return `\n<ul>${items}</ul>\n`;
+    });
+    html = html.replace(/(?:^|\n)((?:\d+\.\s.+(?:\n|$))+)/g, (block) => {
+      const items = block.trim().split('\n').map(line => `<li>${line.replace(/^\d+\.\s/, '')}</li>`).join('');
+      return `\n<ol>${items}</ol>\n`;
+    });
+    html = html.replace(/\n\n+/g, '</p><p>');
+    html = `<p>${html}</p>`;
+    html = html.replace(/<p>\s*(<(?:h1|h2|h3|ul|ol|pre)[\s\S]*?<\/(?:h1|h2|h3|ul|ol|pre)>)\s*<\/p>/g, '$1');
+    html = html.replace(/\n/g, '<br>');
+    return html;
+  }
+
+  function nodeToMarkdown(node) {
+    if (!node) return '';
+    if (node.nodeType === Node.TEXT_NODE) return node.textContent || '';
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+
+    const el = node;
+    const tag = el.tagName.toLowerCase();
+    const children = Array.from(el.childNodes).map(nodeToMarkdown).join('');
+
+    if (tag === 'h1') return `# ${children.trim()}\n\n`;
+    if (tag === 'h2') return `## ${children.trim()}\n\n`;
+    if (tag === 'h3') return `### ${children.trim()}\n\n`;
+    if (tag === 'strong' || tag === 'b') return `**${children}**`;
+    if (tag === 'em' || tag === 'i') return `*${children}*`;
+    if (tag === 'code' && el.parentElement && el.parentElement.tagName.toLowerCase() !== 'pre') return `\`${children}\``;
+    if (tag === 'pre') return `\`\`\`\n${el.textContent || ''}\n\`\`\`\n\n`;
+    if (tag === 'a') return `[${children.trim() || 'link'}](${el.getAttribute('href') || '#'})`;
+    if (tag === 'img') return `![${el.getAttribute('alt') || 'image'}](${el.getAttribute('src') || ''})`;
+    if (tag === 'li') return `${children.trim()}\n`;
+    if (tag === 'ul') return `${Array.from(el.children).map(li => `- ${nodeToMarkdown(li).trim()}`).join('\n')}\n\n`;
+    if (tag === 'ol') return `${Array.from(el.children).map((li, i) => `${i + 1}. ${nodeToMarkdown(li).trim()}`).join('\n')}\n\n`;
+    if (tag === 'br') return '\n';
+    if (tag === 'p' || tag === 'div') return `${children.trim()}\n\n`;
+    return children;
+  }
+
+  function syncMarkdownFromRich() {
+    if (!richEditorEl || !markdownEl || !('value' in markdownEl)) return;
+    const md = Array.from(richEditorEl.childNodes).map(nodeToMarkdown).join('').replace(/\n{3,}/g, '\n\n').trim();
+    markdownEl.value = md;
+  }
+
+  function syncRichFromMarkdown() {
+    if (!richEditorEl || !markdownEl || !('value' in markdownEl)) return;
+    richEditorEl.innerHTML = markdownToHtml(markdownEl.value || '');
+  }
+
+  function setMode(mode) {
+    editorMode = mode;
+    const isRich = mode === 'rich';
+
+    if (isRich) {
+      syncRichFromMarkdown();
+      richEditorEl.classList.remove('hidden');
+      richToolbarEl.classList.remove('hidden');
+      markdownEl.classList.add('hidden');
+      modeRichBtn.classList.add('bg-red', 'text-white');
+      modeRichBtn.classList.remove('text-gray-300');
+      modeMdBtn.classList.remove('bg-red', 'text-white');
+      modeMdBtn.classList.add('text-gray-300');
+    } else {
+      syncMarkdownFromRich();
+      richEditorEl.classList.add('hidden');
+      richToolbarEl.classList.add('hidden');
+      markdownEl.classList.remove('hidden');
+      modeMdBtn.classList.add('bg-red', 'text-white');
+      modeMdBtn.classList.remove('text-gray-300');
+      modeRichBtn.classList.remove('bg-red', 'text-white');
+      modeRichBtn.classList.add('text-gray-300');
+    }
+  }
+
+  function insertInlineImageMarkdown(path) {
+    if (!markdownEl || !('value' in markdownEl)) return;
+    const snippet = `\n![imagen](${path})\n`;
+
+    if (editorMode === 'markdown') {
+      const start = markdownEl.selectionStart || markdownEl.value.length;
+      const end = markdownEl.selectionEnd || markdownEl.value.length;
+      markdownEl.value = `${markdownEl.value.slice(0, start)}${snippet}${markdownEl.value.slice(end)}`;
+      markdownEl.focus();
+      return;
+    }
+
+    if (richEditorEl) {
+      richEditorEl.focus();
+      document.execCommand('insertHTML', false, `<p><img src="${path}" alt="imagen"></p>`);
+      syncMarkdownFromRich();
+    }
+  }
+
+  function buildMarkdown() {
+    if (editorMode === 'rich') syncMarkdownFromRich();
+
+    const title = getValue(titleEl);
+    const author = getValue(authorEl) || 'Community';
+    const category = (getValue(categoryEl) || 'INTEL').toUpperCase();
+    const dateText = formatDate(getValue(dateEl));
+    const readTime = (getValue(readTimeEl) || '8 MIN READ').toUpperCase();
+    const image = getValue(imageEl) || '/images/cover-default.png';
+    const summary = getValue(summaryEl) || 'Resumen pendiente.';
+    const content = getValue(markdownEl);
+    const isFeatured = featuredEl && 'checked' in featuredEl ? featuredEl.checked : false;
+    const tagsYaml = tagsToYaml(getValue(tagsEl));
+
+    if (!title || !content || !dateText) {
+      return { error: 'Completa Titulo, Fecha y Contenido.' };
+    }
+
+    const filename = `${slugify(title)}.md`;
+    const lines = [
+      '---',
+      `title: "${escapeQuotes(title)}"`,
+      `date: "${dateText}"`,
+      `category: "${escapeQuotes(category)}"`,
+      `author: "${escapeQuotes(author)}"`,
+      `tags: ${tagsYaml}`,
+      `readTime: "${escapeQuotes(readTime)}"`,
+      `image: "${escapeQuotes(image)}"`,
+      `summary: "${escapeQuotes(summary)}"`,
+      ...(isFeatured ? ['featured: true'] : []),
+      '---',
+      '',
+      content,
+      ''
+    ];
+
+    return {
+      filename,
+      markdown: lines.join('\n')
+    };
+  }
+
+  function renderOutput(result) {
+    if (result.error) {
+      setStatus(result.error, true);
+      return false;
+    }
+
+    outputEl.value = result.markdown;
+    targetFileEl.textContent = `${targetPath}/${result.filename}`;
+    setStatus('Markdown generado. Puedes copiarlo o abrir GitHub para crear el archivo.');
+    return true;
+  }
+
+  modeRichBtn?.addEventListener('click', () => setMode('rich'));
+  modeMdBtn?.addEventListener('click', () => setMode('markdown'));
+
+  richToolbarEl?.querySelectorAll('[data-cmd]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const cmd = btn.getAttribute('data-cmd');
+      if (!cmd) return;
+      richEditorEl.focus();
+      document.execCommand(cmd, false);
+      syncMarkdownFromRich();
+    });
   });
+
+  richToolbarEl?.querySelectorAll('[data-block]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const block = btn.getAttribute('data-block');
+      if (!block) return;
+      richEditorEl.focus();
+      document.execCommand('formatBlock', false, block.toUpperCase());
+      syncMarkdownFromRich();
+    });
+  });
+
+  document.getElementById('insert-link')?.addEventListener('click', () => {
+    const url = window.prompt('URL del enlace:');
+    if (!url) return;
+    richEditorEl.focus();
+    document.execCommand('createLink', false, url);
+    syncMarkdownFromRich();
+  });
+
+  document.getElementById('insert-image-url')?.addEventListener('click', () => {
+    const url = window.prompt('URL o ruta de imagen (/images/...):');
+    if (!url) return;
+    insertInlineImageMarkdown(url);
+  });
+
+  richEditorEl?.addEventListener('input', () => {
+    if (editorMode === 'rich') syncMarkdownFromRich();
+  });
+
+  markdownEl?.addEventListener('input', () => {
+    if (editorMode === 'markdown') syncRichFromMarkdown();
+  });
+
+  generateBtn?.addEventListener('click', () => {
+    const result = buildMarkdown();
+    renderOutput(result);
+  });
+
+  copyBtn?.addEventListener('click', async () => {
+    const result = buildMarkdown();
+    if (!renderOutput(result)) return;
+
+    try {
+      await navigator.clipboard.writeText(result.markdown);
+      setStatus('Markdown copiado al portapapeles.');
+    } catch {
+      setStatus('No se pudo copiar automaticamente. Copialo desde la caja de salida.', true);
+    }
+  });
+
+  githubBtn?.addEventListener('click', () => {
+    const result = buildMarkdown();
+    if (!renderOutput(result)) return;
+
+    const url = `https://github.com/${repoOwner}/${repoName}/new/main/${targetPath}?filename=${encodeURIComponent(result.filename)}&value=${encodeURIComponent(result.markdown)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+    setStatus('Abriendo GitHub con el archivo precargado...');
+  });
+
+  imageFileEl?.addEventListener('change', (e) => {
+    const target = e.target;
+    if (!target || !('files' in target) || !target.files || target.files.length === 0) return;
+
+    const file = target.files[0];
+    const safeName = file.name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9.\-_]/g, '-');
+
+    if (imageEl && 'value' in imageEl) {
+      imageEl.value = `/images/${safeName}`;
+    }
+
+    setStatus('Ruta de portada autocompletada. Subela en GitHub a public/images.');
+  });
+
+  insertInlineImageBtn?.addEventListener('click', () => {
+    if (!inlineImageFileEl || !('files' in inlineImageFileEl) || !inlineImageFileEl.files || inlineImageFileEl.files.length === 0) {
+      setStatus('Selecciona una imagen para insertar en el contenido.', true);
+      return;
+    }
+
+    const file = inlineImageFileEl.files[0];
+    const safeName = file.name
+      .toLowerCase()
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9.\-_]/g, '-');
+
+    insertInlineImageMarkdown(`/images/${safeName}`);
+    setStatus('Imagen insertada en contenido. Recuerda subirla a public/images en GitHub.');
+  });
+
+  // initial
+  if (richEditorEl) {
+    richEditorEl.innerHTML = '<p>Escribe tu contenido aqui...</p>';
+  }
+  syncMarkdownFromRich();
+  setMode('rich');
 </script>

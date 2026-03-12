@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
+import { postTimestamp } from '../lib/dates';
 
 const posts = await getCollection('blog');
 
@@ -16,8 +17,7 @@ const authorStats = posts.reduce((acc, post) => {
     }
     acc[author].count++;
     
-    // Simple date comparison (assuming string format YYYY-MM-DD or similar that is sortable)
-    if (new Date(post.data.date) > new Date(acc[author].lastPost)) {
+    if (postTimestamp(post.data.date) > postTimestamp(acc[author].lastPost)) {
         acc[author].lastPost = post.data.date;
     }
     acc[author].categories.add(post.data.category);
@@ -109,7 +109,7 @@ const sortedAuthors = Object.entries(authorStats)
                             <div class="relative mb-8">
                                 <div class="w-32 h-32 rounded-full p-1 bg-gradient-to-tr from-red/20 via-transparent to-red/20 group-hover:from-red group-hover:to-red transition-all duration-700 relative">
                                     <div class="w-full h-full rounded-full bg-dark flex items-center justify-center overflow-hidden border border-dark-300 relative">
-                                        <img src={`https://api.dicebear.com/7.x/bottts/svg?seed=${author.name}`} alt={author.name} class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-500 opacity-70 group-hover:opacity-100" />
+                                        <img src={`https://api.dicebear.com/7.x/bottts/svg?seed=${author.name}`} alt={author.name} loading="lazy" decoding="async" class="w-4/5 h-4/5 object-contain group-hover:scale-110 transition-transform duration-500 opacity-70 group-hover:opacity-100" />
                                     </div>
                                     
                                     <!-- Post Count Overlay -->

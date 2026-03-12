@@ -2,9 +2,10 @@
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import PostTags from '../components/PostTags.astro';
+import { sortByPostDateDesc } from '../lib/dates';
 
 const posts = await getCollection('blog');
-const sortedPosts = posts.sort((a, b) => b.data.date.localeCompare(a.data.date));
+const sortedPosts = sortByPostDateDesc(posts);
 
 // Find posts that explicitly have featured: true
 let featuredList = sortedPosts.filter(post => post.data.featured === true);
@@ -28,11 +29,11 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
                 <div class={`carousel-slide row-start-1 col-start-1 transition-opacity duration-1000 ease-in-out ${activeClass}`}>
                 <!-- Background image -->
                 <div class="absolute inset-0">
-                    <img src={featuredPost.data.image} alt="" class="w-full h-full object-cover opacity-30" />
+                    <img src={featuredPost.data.image} alt="" loading={index === 0 ? "eager" : "lazy"} fetchpriority={index === 0 ? "high" : "auto"} decoding="async" class="w-full h-full object-cover opacity-30" />
                     <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/80 to-dark/40"></div>
                 </div>
 
-                <div class="relative max-w-7xl mx-auto w-full px-6 lg:px-8 py-28 lg:py-40 flex items-center">
+                <div class="relative max-w-[88rem] mx-auto w-full px-6 lg:px-8 py-28 lg:py-40 flex items-center">
                     <div class="max-w-3xl">
                         <!-- Badge -->
                         <div class="inline-flex items-center gap-2 bg-red/10 border border-red/30 rounded-full px-4 py-1.5 mb-8">
@@ -92,7 +93,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
     </section>
 
     <!-- ===== POSTS SECTION ===== -->
-    <section class="max-w-7xl mx-auto px-6 lg:px-8 py-20">
+    <section class="max-w-[88rem] mx-auto px-6 lg:px-8 py-20">
         <!-- Section header -->
         <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
             <div>
@@ -130,6 +131,8 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
                         <img
                             src={post.data.image}
                             alt={post.data.title}
+                            loading="lazy"
+                            decoding="async"
                             class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         <div class="absolute inset-0 bg-gradient-to-t from-dark-100 to-transparent opacity-50"></div>
@@ -175,7 +178,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
     </section>
 
     <!-- ===== EVENTOS ===== -->
-    <section id="eventos" class="max-w-7xl mx-auto px-6 lg:px-8 pb-20">
+    <section id="eventos" class="max-w-[88rem] mx-auto px-6 lg:px-8 pb-20">
         <div class="relative bg-dark-100 border border-dark-300 rounded-2xl p-8 md:p-12 overflow-hidden group hover:border-red/30 transition-colors duration-500 shadow-2xl">
             <!-- Decorative glow -->
             <div class="absolute -top-24 -right-24 w-64 h-64 bg-red/10 blur-[80px] rounded-full group-hover:bg-red/20 transition-colors duration-700 pointer-events-none"></div>
@@ -217,7 +220,7 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
                                 <a href={`${import.meta.env.BASE_URL}posts/${event.slug}`} class="block group/card bg-dark border border-dark-300 rounded-xl overflow-hidden hover:border-red/40 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_8px_30px_rgb(255,0,0,0.1)] flex flex-col">
                                     <div class="relative aspect-video overflow-hidden border-b border-dark-300">
                                         <div class="absolute inset-0 bg-dark/60 z-10 group-hover/card:bg-transparent transition-colors duration-500"></div>
-                                        <img src={event.data.image} alt={event.data.title} class="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105" />
+                                        <img src={event.data.image} alt={event.data.title} loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover/card:scale-105" />
                                         
                                         <!-- Etiqueta de fecha flotante -->
                                         <div class="absolute top-3 right-3 z-20">
@@ -364,3 +367,4 @@ const eventPosts = sortedPosts.filter(post => post.data.category.toLowerCase() =
         }
     });
 </script>
+

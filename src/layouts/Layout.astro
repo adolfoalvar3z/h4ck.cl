@@ -1,55 +1,87 @@
----
+﻿---
 import Navbar from '../components/Navbar.astro';
 import '../assets/css/main.css';
 
 interface Props {
-	title: string;
-	description?: string;
+  title: string;
+  description?: string;
+  image?: string;
+  type?: 'website' | 'article';
+  publishedTime?: string;
 }
 
-const { title, description = "Hacker_Log: Plataforma de inteligencia sobre ciberseguridad." } = Astro.props;
+const {
+  title,
+  description = 'Hacker_Log: Plataforma de inteligencia sobre ciberseguridad.',
+  image,
+  type = 'website',
+  publishedTime,
+} = Astro.props;
+
+const siteName = 'HACKER_LOG';
+const canonicalUrl = Astro.url.href;
+const pageTitle = `${title} - ${siteName}`;
+const baseForAssets = Astro.site ? new URL(import.meta.env.BASE_URL, Astro.site) : Astro.url;
+const defaultImage = new URL('favicon.svg', baseForAssets).href;
+const imageUrl = image ? new URL(image, baseForAssets).href : defaultImage;
+const isArticle = type === 'article';
+const rssUrl = new URL('rss.xml', baseForAssets).href;
 ---
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} â€” HACKER_LOG</title>
-    <meta name="description" content={description}>
-    <meta name="keywords" content="ciberseguridad, malware, hacking, inteligencia, hacking Ã©tico">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{pageTitle}</title>
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <meta name="description" content={description}>
+  <meta name="keywords" content="ciberseguridad, malware, hacking, inteligencia, hacking etico">
+  <meta name="robots" content="index,follow,max-image-preview:large">
 
-    <!-- Bootstrap Icons (solo iconos) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  <link rel="canonical" href={canonicalUrl}>
+  <link rel="alternate" type="application/rss+xml" title={`${siteName} RSS`} href={rssUrl}>
+
+  <meta property="og:site_name" content={siteName}>
+  <meta property="og:locale" content="es_CL">
+  <meta property="og:type" content={type}>
+  <meta property="og:title" content={pageTitle}>
+  <meta property="og:description" content={description}>
+  <meta property="og:url" content={canonicalUrl}>
+  <meta property="og:image" content={imageUrl}>
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content={pageTitle}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={imageUrl}>
+
+  {isArticle && publishedTime && <meta property="article:published_time" content={publishedTime} />}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 </head>
 <body class="bg-dark text-gray-200 font-sans antialiased">
+  <Navbar />
 
-    <Navbar />
+  <main>
+    <slot />
+  </main>
 
-    <main>
-        <slot />
-    </main>
-
-    <!-- Footer -->
-    <footer class="max-w-7xl mx-auto px-6 lg:px-8 mt-24 pb-12">
-        <div class="border-t border-dark-300 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <a href={import.meta.env.BASE_URL} class="flex items-center gap-2 no-underline">
-                <span class="font-mono font-bold text-sm text-gray-500 tracking-tight">HACKER<span class="text-red">_</span>LOG</span>
-            </a>
-            <div class="flex items-center gap-5 text-gray-600 text-lg">
-                <a href="#" class="hover:text-red transition-colors"><i class="bi bi-github"></i></a>
-                <a href="#" class="hover:text-red transition-colors"><i class="bi bi-twitter-x"></i></a>
-                <a href="#" class="hover:text-red transition-colors"><i class="bi bi-rss"></i></a>
-            </div>
-            <p class="font-mono text-[10px] text-gray-600 tracking-widest uppercase">Â© 2026 Â· All rights reserved</p>
-        </div>
-    </footer>
-
+  <footer class="max-w-[88rem] mx-auto px-6 lg:px-8 mt-24 pb-12">
+    <div class="border-t border-dark-300 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
+      <a href={import.meta.env.BASE_URL} class="flex items-center gap-2 no-underline">
+        <span class="font-mono font-bold text-sm text-gray-500 tracking-tight">HACKER<span class="text-red">_</span>LOG</span>
+      </a>
+      <div class="flex items-center gap-5 text-gray-600 text-lg">
+        <a href="https://github.com/adolfoalvar3z/h4ck.cl" target="_blank" rel="noopener noreferrer" class="hover:text-red transition-colors" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        <a href="https://x.com/h4ck_cl" target="_blank" rel="noopener noreferrer" class="hover:text-red transition-colors" aria-label="X"><i class="bi bi-twitter-x"></i></a>
+        <a href={`${import.meta.env.BASE_URL}rss.xml`} class="hover:text-red transition-colors" aria-label="RSS"><i class="bi bi-rss"></i></a>
+      </div>
+      <p class="font-mono text-[10px] text-gray-600 tracking-widest uppercase">© 2026 · All rights reserved</p>
+    </div>
+  </footer>
 </body>
 </html>
-
