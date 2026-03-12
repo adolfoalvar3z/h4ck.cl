@@ -418,3 +418,6 @@ No valid renderer was found for the `.js` file extension.
 20:26:44 [types] Generated 2ms
 20:28:09 Configuration file updated. Restarting...
 20:28:09 [types] Generated 1ms
+20:32:59 [ERROR] [router] Request URLs for public/ assets must also include your base. "/h4ck.cl/favicon.ico" expected, but received "/favicon.ico".
+20:33:39 Configuration file updated. Restarting...
+20:33:39 [types] Generated 1ms
