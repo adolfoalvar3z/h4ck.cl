@@ -52,3 +52,28 @@
 21:32:51 [200] / 14ms
 21:32:56 [watch] src/layouts/Layout.astro
 21:32:57 [200] / 6ms
+21:33:42 [watch] src/components/Navbar.astro
+21:33:42 [200] / 8ms
+21:34:24 [watch] src/components/Navbar.astro
+21:34:24 [200] / 13ms
+21:34:29 Configuration file updated. Restarting...
+21:34:29 [watch] astro.config.mjs
+21:34:30 [types] Generated 2ms
+21:34:30 [vite] Re-optimizing dependencies because vite config has changed
+21:34:30 [200] / 87ms
+21:34:30 [200] / 87ms
+21:35:14 Configuration file updated. Restarting...
+21:35:14 [watch] astro.config.mjs
+21:35:14 [watch] src/components/Navbar.astro
+21:35:14 [types] Generated 1ms
+21:35:14 [vite] Re-optimizing dependencies because vite config has changed
+21:35:14 [200] / 73ms
+21:35:14 [200] / 74ms
+21:35:37 [WARN] [vite] [33mThe file does not exist at "F:/laragon/www/h4ck.cl/node_modules/.vite/deps/marked.js?v=c6c0eda1" which is in the optimize deps directory. The dependency might be incompatible with the dep optimizer. Try adding it to `optimizeDeps.exclude`.[39m
+21:35:41 [200] /api/keystatic/tree 21ms
+21:35:59 [200] / 8ms
+21:36:04 [200] /about 6ms
+21:38:48 Configuration file updated. Restarting...
+21:38:48 [watch] astro.config.mjs
+21:38:48 [types] Generated 1ms
+21:38:48 [vite] Re-optimizing dependencies because vite config has changed
