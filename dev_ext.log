@@ -79,3 +79,35 @@
 21:38:48 [vite] Re-optimizing dependencies because vite config has changed
 21:38:49 [200] /about 153ms
 21:38:49 [200] /about 154ms
+21:40:20 Configuration file updated. Restarting...
+21:40:20 [watch] astro.config.mjs
+21:40:20 [types] Generated 1ms
+21:40:20 [200] /about 19ms
+21:41:33 Configuration file updated. Restarting...
+21:41:33 [watch] astro.config.mjs
+21:41:33 [types] Generated 1ms
+21:41:34 [200] /about 28ms
+21:41:34 [200] /about 28ms
+21:44:35 [200] / 13ms
+21:44:38 [200] /submit-post 8ms
+21:44:45 [200] /generator 5ms
+21:44:46 [vite] [32m✨ new dependencies optimized: [33mmarked[32m[39m
+21:44:46 [vite] [32m✨ optimized dependencies changed. reloading[39m
+21:45:10 [watch] src/components/Navbar.astro
+21:45:10 [200] /submit-post 24ms
+21:47:13 [watch] src/components/CategoryBadge.astro
+21:47:13 [watch] src/components/RelatedPosts.astro
+21:47:13 [watch] src/components/ShareButtons.astro
+21:47:13 [watch] src/pages/author/[author].astro
+21:47:13 [watch] src/pages/category/[slug].astro
+21:47:13 [watch] src/pages/posts/[slug].astro
+21:47:13 [watch] src/pages/tags/[tag].astro
+21:47:13 [watch] src/pages/hall-of-fame.astro
+21:47:13 [watch] src/components/Navbar.astro
+21:47:13 [watch] src/components/PostTags.astro
+21:47:13 [watch] src/layouts/Layout.astro
+21:47:13 [watch] src/pages/about.astro
+21:47:13 [watch] src/pages/generator.astro
+21:47:13 [watch] src/pages/index.astro
+21:47:13 [watch] src/pages/submit-post.astro
+21:47:14 [200] /submit-post 8ms
