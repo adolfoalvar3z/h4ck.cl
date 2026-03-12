@@ -32,3 +32,23 @@
 20:43:45 [200] /keystatic 3ms
 21:24:51 Configuration file updated. Restarting...
 21:24:51 [types] Generated 2ms
+21:25:48 [200] /keystatic 9ms
+21:25:49 [200] /api/keystatic/tree 18ms
+21:26:45 [200] POST /api/keystatic/update 632ms
+21:27:02 [200] /keystatic 3ms
+21:27:02 [200] /api/keystatic/tree 19ms
+21:27:15 [200] /api/keystatic/blob/064a00be8d7a4df462913bca913c8904d5ef4124/src/content/blog/test.mdoc 3ms
+21:27:15 [200] /api/keystatic/blob/51c91308f3e87f51c7ec651fae260050868f146d/public/images/test/image.png 7ms
+21:31:09 [watch] keystatic_page.html
+21:32:29 [200] / 40ms
+21:32:31 [200] /hall-of-fame 7ms
+21:32:41 [200] /submit-post 6ms
+21:32:45 [200] /generator 8ms
+21:32:47 [200] / 9ms
+21:32:47 [vite] [32m✨ new dependencies optimized: [33mmarked[32m[39m
+21:32:47 [vite] [32m✨ optimized dependencies changed. reloading[39m
+21:32:47 [200] / 34ms
+21:32:51 [watch] src/components/Navbar.astro
+21:32:51 [200] / 14ms
+21:32:56 [watch] src/layouts/Layout.astro
+21:32:57 [200] / 6ms

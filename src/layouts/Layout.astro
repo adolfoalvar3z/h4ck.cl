@@ -1,4 +1,4 @@
----
+﻿---
 import Navbar from '../components/Navbar.astro';
 import '../assets/css/main.css';
 
@@ -15,9 +15,9 @@ const { title, description = "Hacker_Log: Plataforma de inteligencia sobre ciber
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title} — HACKER_LOG</title>
+    <title>{title} â€” HACKER_LOG</title>
     <meta name="description" content={description}>
-    <meta name="keywords" content="ciberseguridad, malware, hacking, inteligencia, hacking ético">
+    <meta name="keywords" content="ciberseguridad, malware, hacking, inteligencia, hacking Ã©tico">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,7 +38,7 @@ const { title, description = "Hacker_Log: Plataforma de inteligencia sobre ciber
     <!-- Footer -->
     <footer class="max-w-7xl mx-auto px-6 lg:px-8 mt-24 pb-12">
         <div class="border-t border-dark-300 pt-10 flex flex-col md:flex-row items-center justify-between gap-6">
-            <a href="/" class="flex items-center gap-2 no-underline">
+            <a href={import.meta.env.BASE_URL} class="flex items-center gap-2 no-underline">
                 <span class="font-mono font-bold text-sm text-gray-500 tracking-tight">HACKER<span class="text-red">_</span>LOG</span>
             </a>
             <div class="flex items-center gap-5 text-gray-600 text-lg">
@@ -46,9 +46,10 @@ const { title, description = "Hacker_Log: Plataforma de inteligencia sobre ciber
                 <a href="#" class="hover:text-red transition-colors"><i class="bi bi-twitter-x"></i></a>
                 <a href="#" class="hover:text-red transition-colors"><i class="bi bi-rss"></i></a>
             </div>
-            <p class="font-mono text-[10px] text-gray-600 tracking-widest uppercase">© 2026 · All rights reserved</p>
+            <p class="font-mono text-[10px] text-gray-600 tracking-widest uppercase">Â© 2026 Â· All rights reserved</p>
         </div>
     </footer>
 
 </body>
 </html>
+
